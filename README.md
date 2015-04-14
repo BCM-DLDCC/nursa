@@ -1,10 +1,9 @@
 NURSA
 =====
-Welcome to the Nuclear Receptor Signaling Atlas (NURSA) open source code repository. Please refer to the Supplementary Materials directory for instructions on deploying NURSA3 and associated software. 
+Welcome to the Nuclear Receptor Signaling Atlas (NURSA) open source code repository. Please refer to the Supplementary Materials directory for NURSA3 object models and the NURSA3 deployment model.
 
-The NURSA3 Deployment Guide provides instructions on required middleware and environment configurations for NURSA3 deployments. 
+Please refer to the Wiki for the NURSA3 Deployment Guide, which provides instructions on required middleware and environment configurations for NURSA3 deployments, and the NURSA3 architecture. 
 
-The other documents provided in the Supplementary Materials directory are a NURSA3 architecture doc, NURSA3 deployment model, and object models for the NURSA3 core, common synonyms, molecules, and clinical.
 Please refer questions to the issues page. 
 
 Regards,
