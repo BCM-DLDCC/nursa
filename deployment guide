@@ -1,0 +1,25 @@
+Nursa3 is designed to for deployment into any JEE6 compliant server such as Jboss 6+, Glassfish 3.*, WebSphere 8+, etc. Nursa3 has been tested and found to work well on Jboss AS 7.1.1.Final server. 
+
+If deploying on Jboss AS 7.1.1.Final, there are JAX-RS and Hibernate API version dependencies that would require that you  upgrade the Jboss modules. Use the usual Jboss AS 7 module upgrade mechanism  to make those upgrades. The API versions are RestEasy 3.0.9.Final and Hibernate 4.2.8
+
+Here is a snippet from pom.xml file for RestEasy version:
+
+<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>3.0.9.Final</version>
+			<scope>provided</scope>
+		</dependency>
+
+Here is a module.xml snippet for Hibernate upgrade:
+
+<module xmlns="urn:jboss:module:1.1" name="org.hibernate">
+    <resources>
+        <resource-root path="hibernate-core-4.2.8.Final.jar"/>
+        <resource-root path="hibernate-commons-annotations-4.0.2.Final.jar"/>
+        <resource-root path="hibernate-entitymanager-4.2.8.Final.jar"/>
+        <resource-root path="hibernate-infinispan-4.2.8.Final.jar"/>
+    </resources>
+
+For a Jboss AS 7 deoplyment, a sample standalone.xml deployment file has been included under /serve/ folder of the source. If you choose to use this standalone.xml for your deployment, make the necessary changes in the datasource and HTTP(S) ports section.
+
+The pom file includes a dev profile for a jenkins jobs. Of course, you must change the relevant URLs and accounts to match your own environment. 
