@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui">
+	<div id="TopBar">
+		<div id="LoginInformation">
+			<h:form>
+				<h:outputText id="menuWelcomeId"
+					value="Signed in as: #{credentials.username} "
+					rendered="#{identity.loggedIn}" />
+				<h:commandLink id="logoutLink" value="Log Out"
+					action="#{commonProjectController.logout}"
+					rendered="#{identity.loggedIn}" ajax="false" />
+				<h:outputText id="signInId" value="Sign In"
+					rendered="#{!identity.loggedIn}" />
+
+				<h:outputText id="registerLinkId" value="Register Here"
+					rendered="#{!identity.loggedIn}" />
+				<div style="clear: both" />
+			</h:form>
+		</div>
+		<div id="TopSearch">Top Search Area</div>
+	</div>
+</ui:composition>

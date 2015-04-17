@@ -1,0 +1,141 @@
+#editableNRArea {
+	float: right;
+}
+
+.labelText {
+	float: right;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.informationText {
+	float: left;
+}
+
+.adminFixedColWidth {
+	width: 250px;
+}
+
+.verticalAlign {
+	vertical-align: top;
+}
+
+.ui-icon-delete {
+	background-image: url("#{resource['gfx:delete.gif']}") !important;
+	height: 16px !important;
+	width: 16px !important;
+}
+
+.stack {
+	position: absolute;
+	right: 0px;
+	color: white;
+}
+
+#TopBar {
+	width:100%;
+	height: 63px;
+	background: url("#{resource['gfx:topBarBackground.png']}") repeat scroll 0 0 transparent; 
+}
+
+#LoginInformation {
+}
+
+#TopSearch {
+}
+
+#Navigation {
+}
+
+.head {
+	background-image: url("#{resource['gfx:navigationBackground.png']}");
+	height: 185px;
+	position: relative;
+}
+
+#logo {
+	float: left;
+	height: 80px;
+	margin-left: 5px;
+}
+
+#BCMLogo {
+	float: right;
+	height: 80px;
+	margin-right: 5px;
+}
+
+body {
+	font-size: 12px;
+	margin: 0px auto;
+	background: white;
+	width: 1200px;
+}
+
+
+.footer {
+	text-align: center;
+	font-size: 11px;
+	margin-bottom: 10px;
+	padding: 10px 30px;
+}
+
+.buttonRight {
+	float: right;
+}
+
+/* utility classes */
+
+.ui-outputlabel-rfi {
+    color: red;
+    float: right;
+}
+
+.labelText {
+    float: right;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* reset PF theming of form fields */
+.ui-datalist-content {
+	border: none !important;
+}
+
+.ui-helper-clearfix:after {
+	margin: 0 50px;
+}
+
+.noBorders .noBorders tr,.noBorders td {
+	background: none repeat scroll 0 0 transparent !important;
+	border: medium none !important;
+}
+
+.ui-panelgrid tr,.ui-panelgrid td {
+	border: 0 none !important;
+	padding: 2px !important;
+}
+
+.ui-inputfield,.ui-widget-content .ui-inputfield,.ui-widget-header .ui-inputfield
+	{
+	background: none repeat scroll 0 0 #FFFFFF;
+	box-shadow: 0 2px 2px #8F8F8F inset;
+	color: #313131;
+}
+
+/* make bold labels in tables */
+td label.ui-outputlabel {
+	font-weight: bold;
+}
+
+/* remove inherited borders from checkboxSelects that are inside panelGrids */
+.checkBoxNoBorder tr td {
+	border: none;
+}
+
+/* Move the panel expansion and contraction to the right side */
+.ui-panel .ui-panel-titlebar-icon {
+	float: left !important;
+	margin-right: 1.2em !important;
+}
+/* end utility classes */

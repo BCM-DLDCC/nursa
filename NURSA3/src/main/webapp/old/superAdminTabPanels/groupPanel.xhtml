@@ -1,0 +1,95 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+	<p:dataTable var="group" value="#{superAdminController.groups}">
+		<p:column style="width:36px">
+			<p:rowToggler />
+		</p:column>
+		<p:column headerText="Name">
+			<h:outputText value="#{group.name}" />
+		</p:column>
+		<p:column style="width:36px">
+			<p:commandLink update=":superAdminForm:adminTabPanel"
+				action="#{superAdminController.deleteGroup(group)}" process="@this"
+				style="float: left;">
+				<span class="ui-icon ui-icon-delete" />
+			</p:commandLink>
+		</p:column>
+		<p:rowExpansion>
+			<p:panelGrid>
+				<p:row>
+					<p:column>
+						<h:outputText value="Child Groups: " styleClass="labelText" />
+					</p:column>
+					<p:column>
+						<p:dataList value="#{superAdminController.listChildren(group)}"
+							var="childGroup" itemType="disc" styleClass="informationText"
+							rendered="#{superAdminController.listChildren(group).size != 0}">
+							<h:outputText value="#{childGroup.name}" />
+						</p:dataList>
+						<h:outputText value="This group has no children."
+							rendered="#{superAdminController.listChildren(group).size == 0}" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:rowExpansion>
+		<f:facet name="footer">
+			<div class="buttonRight">
+				<p:commandButton value="Add Group"
+					action="#{superAdminController.addNewGroup}"
+					oncomplete="editGroupInformationWidget.show()"
+					update=":superAdminForm:editGroupInformation" process="@this" />
+			</div>
+
+		</f:facet>
+	</p:dataTable>
+
+	<p:dialog id="editGroupInformation" header="Edit Group"
+		widgetVar="editGroupInformationWidget" resizable="false" modal="true">
+		<p:ajax event="close" listener="#{superAdminController.cancelGroup}" />
+		<p:panelGrid>
+			<p:row>
+				<p:column>
+					<h:outputText value="Name: " styleClass="labelText" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{superAdminController.selectedGroupName}"
+						disabled="#{superAdminController.selectedGroup != null}"
+						styleClass="informationText" />
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<h:outputText value="Child Groups: " styleClass="labelText" />
+				</p:column>
+				<p:column>
+					<p:selectManyCheckbox
+						value="#{superAdminController.selectedChildGroups}"
+						layout="pageDirection" converter="groupConverter"
+						styleClass="informationText">
+						<f:selectItems value="#{superAdminController.groups}" var="group"
+							itemLabel="#{group.name}" itemValue="#{group}" />
+					</p:selectManyCheckbox>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<div style="clear: both" />
+		<div class="buttonRight">
+			<p:commandButton value="Cancel"
+				action="#{superAdminController.cancelGroup}"
+				onclick="editGroupInformationWidget.hide()" process="@parent" />
+			<p:commandButton value="Save"
+				action="#{superAdminController.saveGroup}"
+				oncomplete="editGroupInformationWidget.hide()"
+				update="adminTabPanel" process="@parent" />
+		</div>
+		<div style="clear: both" />
+	</p:dialog>
+
+</ui:composition>

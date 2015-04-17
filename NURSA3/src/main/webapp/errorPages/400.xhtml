@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	template="/WEB-INF/templates/standard.xhtml">
+	
+	<ui:define name = "title">400</ui:define>
+	
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+		</ui:include>
+	</ui:define>
+
+	<ui:define name = "pageTitle">
+		<div class="row">
+			<div class="col-md-6">
+				<h:graphicImage styleClass="error-image pull-right" value="/resources/images/uh-oh.jpg" />
+			</div>
+			<div class="col-md-6"><p class="error-text">400</p></div>
+		</div>
+		<p>Sorry, your request was not understood. </p>
+
+		<h5>What do I do now?</h5>
+		<p>If you found a broken link from within NURSA or from another site, please <a href="mailto:support@nursa.org">email</a> us.</p>
+
+		<p>Otherwise, you might want to check out the new NURSA <h:link value="Homepage" outcome="/index.jsf" />,
+		Search for a nuclear receptor (NR), NR ligand or coregulator (CoR) on the all <h:link value="Molecules" outcome="/molecules/index.jsf" /> page,
+		Find NR, NR ligand or CoR-related <h:link value="Datasets" outcome="/datasets/index.jsf" />,
+		Mine tens of millions of data points in NR signaling-regulated transcriptomes in <a href="http://www.nursa.org/nursaGrails/transcriptomine/query?showLayout=1" target="_blank">Transcriptomine</a>,
+		Identify NR  &amp; coreg-relevant drugs and clinical trials in the <h:link value="Clinical" outcome="/clinical/index.jsf" /> section,
+		Look for <h:link value="Funding" outcome="/funding/index.jsf" /> opportunities,
+		Find an article or submit a manuscript to our open access journal <a href="http://www.nrsignaling.org/" target="_blank">Nuclear Receptor Signaling</a>,  
+		or learn more about <h:link value="NURSA" outcome="/" />.</p>
+
+	</ui:define>
+</ui:composition>

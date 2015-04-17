@@ -1,0 +1,124 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	xmlns:func="http://bcm.edu.dldcc.big/nursa/functions"
+	template="/WEB-INF/templates/masterList.xhtml">
+
+<!--  DO NOT AUTOFORMAT THIS FILE. DOING SO WILL BREAK THE COUNT OF NUCLEAR RECEPTORS IN THE "TOTALS" SECTION.
+THIS IS IN ALL CAPS BECAUSE CW DID THIS YET AGAIN, BREAKING THAT PART OF THE PAGE, AND HE NEEDS TO STOP DOING
+THAT POST-HASTE.
+
+SIGNED,
+CW -->
+
+	<ui:define name="title">NURSA - Reagents</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Reagents" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Reagents" outcome="/reagents/index.jsf" /></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="autocomplete">
+		<sc:reagentSearch />
+	</ui:define>
+
+	<ui:define name="filter">
+		<sc:reagentFilter id="reagentsearchComponent" />
+	</ui:define>
+
+	<ui:define name="totals">
+	</ui:define>
+
+	<ui:define name="listing">
+
+		<h:form id="reagentListing">
+			<p:dataTable id="reagentResults" var="reagentResult" paginator="true"
+				value="#{reagentSearchService.searchResults}"
+				emptyMessage="No reagents found for the search criteria"
+				sortMode="multiple" 
+				paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+				rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+				lazy="true">
+
+				<!-- TYPE -->
+				<p:column width="100" sortBy="#{reagentResult.type}" id="typeColumn">
+					<f:facet name="header">
+						<h:outputText value="Type" />
+					</f:facet>
+					<h:outputText value="#{reagentResult.type}" />
+				</p:column>
+				
+				<!-- MOLECULE -->
+				<p:column width="150" sortBy="#{reagentResult.symbol}"
+					id="moleculeColumn">
+					<f:facet name="header">
+						<h:outputText value="Molecule" />
+					</f:facet>
+					<h:link value="#{reagentResult.symbol}" outcome="./index.jsf">
+						<f:param name="doi" value="#{reagentResult.symbolDOI}" />
+					</h:link>
+				</p:column>
+				
+				<!-- NAME -->
+				<p:column sortBy="#{reagentResult.name}" width="200" id="nameColumn">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:link value="#{reagentResult.name}" outcome="./index.jsf">
+						<f:param name="doi" value="#{reagentResult.doi}" />
+					</h:link>
+				</p:column>
+				
+				<!-- SPECIES -->
+				<p:column sortBy="#{reagentResult.species.commonName}" width="200" id="speciesColumn">
+					<f:facet name="header">
+						<h:outputText value="Species" />
+					</f:facet>
+					<h:outputText value="#{reagentResult.species.commonName}" />
+				</p:column>
+				
+				<!-- SOURCE -->
+				<p:column sortBy="#{reagentResult.source}" width="200" id="sourceColumn">
+					<f:facet name="header">
+						<h:outputText value="Source" />
+					</f:facet>
+					<h:outputText value="#{reagentResult.source}" />
+				</p:column>
+			</p:dataTable>
+
+<layout:blockUI block = ":reagentListing" trigger = ":reagentListing:reagentResults" widgetVar = "reagentBlock"/>
+
+		</h:form>
+
+		<!-- CMW 2/17/14 javascript to update the filter count in the reagent filter
+		I don't like putting it here because it introduces a dependency to the filter,
+		but putting it here means that the value will be correct - otherwise, the reagent filter is 
+		called first, before this has a chance to be updated.
+		 -->
+		<script>
+			$($("#reagentTotal").text("#{reagentSearchService.searchResults.rowCount}"))
+			$($("#animalModelTotal").text("#{reagentSearchService.searchResults.reagentBreakdown.containsKey('Animal Model')? reagentSearchService.searchResults.reagentBreakdown['Animal Model']:0}"))
+			$($("#antibodyTotal").text("#{reagentSearchService.searchResults.reagentBreakdown.containsKey('Antibody')? reagentSearchService.searchResults.reagentBreakdown['Antibody']:0}"))
+			$($("#cellLineTotal").text("#{reagentSearchService.searchResults.reagentBreakdown.containsKey('Cell Line')? reagentSearchService.searchResults.reagentBreakdown['Cell Line']:0}"))
+			$($("#primerTotal").text("#{reagentSearchService.searchResults.reagentBreakdown.containsKey('Primer')? reagentSearchService.searchResults.reagentBreakdown['Primer']:0}"))
+						
+		 </script>
+
+
+
+	</ui:define>
+
+</ui:composition>

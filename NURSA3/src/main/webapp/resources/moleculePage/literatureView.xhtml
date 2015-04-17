@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	<composite:interface>
+		<composite:attribute name="molecule" displayName="a molecule object"
+			type="edu.bcm.dldcc.big.nursa.model.Molecule" required="true" />
+
+	</composite:interface>
+	<composite:implementation>
+		<h:form>
+			<p:panel header="Literature" toggleable="true" collapsed="true">
+				<p>
+					The following link performs a Pubmed search on symbol
+					<h:outputLink value="http://www.ncbi.nlm.nih.gov/pubmed/" target="_blank">
+						<h:outputText value="#{cc.attrs.molecule.official.name}" />
+						<f:param name="term" value="#{jsfUtilities.createSearchTerms(cc.attrs.molecule)}" />
+					</h:outputLink>
+					and its synonyms.
+				</p>
+
+
+
+
+				<p>
+					The following link performs a PMC search on symbol
+					<h:outputLink value="http://www.ncbi.nlm.nih.gov/pmc/" target="_blank">
+						<h:outputText value="#{cc.attrs.molecule.official.name}" />
+						<f:param name="term" value="#{jsfUtilities.createSearchTerms(cc.attrs.molecule)}" />
+					</h:outputLink>
+					and its synonyms.
+				</p>
+			</p:panel>
+		</h:form>
+	</composite:implementation>
+</ui:composition>

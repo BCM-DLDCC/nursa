@@ -1,0 +1,763 @@
+@CHARSET "UTF-8";
+
+/* garamond font */
+@font-face {
+	font-family: 'eb_garamondregular';
+	src: url('../fonts/ebgaramond-webfont.eot.jsf');
+	src: url('../fonts/ebgaramond-webfont.eot.jsf?#iefix')
+		format('embedded-opentype'),
+		url('../fonts/ebgaramond-webfont.woff.jsf') format('woff'),
+		url('../fonts/ebgaramond-webfont.ttf.jsf') format('truetype'),
+		url('../fonts/ebgaramond-webfont.svg.jsf#eb_garamondregular')
+		format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'eb_garamondsc';
+	src: url('../fonts/ebgaramondsc-webfont.eot.jsf');
+	src: url('../fonts/ebgaramondsc-webfont.eot.jsf?#iefix')
+		format('embedded-opentype'),
+		url('../fonts/ebgaramondsc-webfont.woff.jsf') format('woff'),
+		url('../fonts/ebgaramondsc-webfont.ttf.jsf') format('truetype'),
+		url('../fonts/ebgaramondsc-webfont.svg.jsf#eb_garamondsc')
+		format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* bumping down the font size from what comes with Flat UI Kit - ultimately, this 
+should be done via LESS and recompiling the CSS files in the kit, but for testing purposes,
+this is fine */
+body, p {
+	font-size: 16px;
+	line-height: 1.6em;
+}
+
+/* styles for home page header */
+.header {
+	background: #2980b9;
+	color: #ffffff;
+	padding: 10px;
+	margin: 5px 0px 5px 0px;
+	border-radius: 6px;
+}
+
+.header .title a {
+	font-family: 'eb-garamondregular';
+	color: #1abc9c;
+	line-height: 1;
+	font-size: 70px
+}
+
+.header .subtitle {
+	margin-bottom: 0px;
+	height: 22px;
+	margin-left: 5px;
+}
+
+.header .mission {
+	font-size: .8em;
+	font-style: italic;
+}
+
+.header .myNURSA {
+	float: right;
+}
+
+.header .myNURSA a {
+	color: #FFFFFF;
+}
+
+.header .nursa-logo {
+	margin: 5px 5px 0px 0px;
+}
+
+.header .socialButtons {
+	text-align: right;
+}
+
+/* styles for regular page header */
+.headerSmall {
+ 	background: #2980b9; 
+ 	color: #ffffff; 
+	padding: 10px;
+	margin: 5px 0px 5px 0px;
+	border-radius: 6px;
+	font-size: 14px;
+}
+
+.headerSmall .title a {
+	font-family: 'eb-garamondregular';
+	color: #1abc9c;
+	line-height: 1;
+	top:-5px;
+	position: relative;
+	font-size: 70px;
+}
+
+.header .nursa-logo, .headerSmall .nursa-logo {
+	height: 120px;
+}
+
+.headerSmall .subtitle {
+	margin-bottom: 0px;
+	height: 22px;
+	font-size: 16px;
+	margin-left: 5px;
+}
+
+@media (min-width: 769px) {
+	.header {
+		padding: 20px 25px 20px 25px;
+		margin: 5px 0px 5px 0px;
+	}
+	.headerSmall {
+		padding: 10px;
+		margin: 5px 0px 5px 0px;
+	}
+	.header .title a {
+		font-size: 100px;
+	}
+	.header .nursa-logo {
+		height: 150px;
+	}
+	.headerSmall .title a {
+		font-size: 75px;
+	}
+	.header .subtitle {
+		height: 36px;
+	}
+}
+
+.headerSmall .myNURSA {
+	float: right;
+	margin-bottom: 0px;
+}
+
+.headerSmall .myNURSA a {
+	color: #FFFFFF;
+}
+
+.headerSmall .nursa-logo {
+	margin: 0px 3px 0px 0px;
+}
+
+.headerSmall .socialButtons {
+	text-align: right;	
+}
+
+.headerSmall .mission {
+	font-size: 1em;
+	font-style: italic;
+}
+/* styles for panels on home page */
+.homePage {
+	margin-top: 30px;
+}
+
+.homePage .panel {
+	height: 170px;
+	transition: color .25s ease, border-color .25s ease;
+	-webkit-transition: color .25s ease, border-color .25s ease;
+	-moz-transition: color .25s ease, border-color .25s ease;
+}
+
+.homePage .panel-heading {
+	transition: background-color .25s ease, border-color .25s ease;
+	-webkit-transition: background-color .25s ease, border-color .25s ease;
+	-moz-transition: background-color .25s ease, border-color .25s ease;
+}
+
+.homePage .panel:hover {
+	/*color: #1abc9c; commenting out 4/25/14 cmw while we test some other options*/
+	border-color: #1abc9c;
+}
+
+.homePage .panel:hover .panel-heading {
+	border-color: #1abc9c;
+	background-color: #92DBCD;
+}
+
+.homePage .panel-body img {
+	float: right;
+	height: 100px;
+}
+
+.homePage .panel img {
+	height: 80px;
+}
+
+.homePage h5{
+	color: #34495e;
+}
+
+/*only links in panel headings won't have underlines */
+.homePage .panel-heading a {
+	text-decoration: none;
+}
+
+.panel-heading a:hover {
+	text-decoration: none;
+}
+
+/*slightly modify a tags in home page panel bodies*/
+.homePage a {
+	color: #34495e;
+}
+
+.homePage a:hover {
+	color: #16A287;
+}
+
+/*styles for main nav */
+.nursaNav .navbar .nav>li>a {
+	padding: 11px 28px;
+}
+
+.nursaNav .navbar .nav>li>ul {
+	margin-left: 15px;
+}
+
+.nursaNav .navbar {
+	margin-bottom: 6px;
+}
+
+.nursaNav .navbar .nav>li>ul:before {
+	left: 20px;
+}
+
+/*active menu item*/
+.nursaNav .navbar .nav>li>a.active {
+	color: #1ABC9C;
+}
+
+/* breadcrumb */
+.breadcrumb {
+	background-color: #ffffff;
+	padding: 0;
+	margin: 0;
+}
+.breadcumbs-search-wrap .breadcrumb{
+	margin: 0;
+	line-height: 37px;
+}
+.ui-autocomplete-panel{
+    width: 330px;
+}
+.ui-autocomplete {
+	display: inline-block;
+	width: 100%;
+	height: 37px;
+}
+.fui-search {
+	position: absolute;
+	right: 25px;
+	top: 8px;
+}
+.ui-autocomplete-item {
+	overflow: hidden;
+}
+.autocomplete-wrap > div{
+	width: 100%;
+}
+.breadcumbs-search-wrap form {
+	margin-bottom: 6px;
+}
+
+/* styles for page footer */
+.bottom-menu {
+	padding: 10px 0px 10px 0px;
+}
+
+.footer {
+	text-align: center;
+}
+
+/*more customizations of PF */
+/*remove styling from subelements of this class
+this relates to a fix that uses p:dataList instead of ui:repeat to address
+a bug that happened on the geneView component and may possibly appear elsewhere*/
+.noDecorate .ui-widget-content {
+	background: none;
+	border: none;
+}
+
+/* shrink paginator font and line height to avoid it wrapping */
+.ui-paginator {
+	font-size: .9em;
+	line-height: .9em;
+}
+
+/*remove bold from dt.ui-datalist-item
+this is to address an issue using ui:repeat on the molecule pages*/
+dt.ui-datalist-item {
+	font-weight: normal;
+}
+
+/* make autocomplete query term highlight even moar bold */
+.ui-autocomplete-query {
+	font-weight: 900;
+}
+
+/* style fixes to accommodate Flat UI Kit and PF */
+
+/*keep icons from showing other icons inside */
+.ui-paginator .ui-paginator-page,.ui-paginator .ui-paginator-pages,.ui-paginator .ui-paginator-next,.ui-paginator .ui-paginator-last,.ui-paginator .ui-paginator-first,.ui-paginator .ui-paginator-prev,.ui-paginator .ui-paginator-current
+	{
+	line-height: 1em;
+}
+
+/* button padding */
+.ui-button-text-only .ui-button-text {
+	padding: 0px;
+}
+
+/*checkbox spacing issue with labels */
+.ui-chkbox {
+	margin-left: 5px;
+	position: relative;
+	top: 2px;
+}
+
+.ui-panel {
+	margin-bottom: 10px;
+}
+
+.ui-dialog-abastract {
+	overflow: scroll;
+	position: absolute;
+}
+
+/* icon on panel titles */
+.ui-panel .ui-panel-titlebar-icon,.ui-panel .ui-panel-titlebar-icon:hover,.ui-panel .ui-panel-titlebar-icon:focus {
+	margin-top: 3px;
+}
+
+/*icon placement on dialog boxes */
+.ui-dialog .ui-dialog-titlebar-close,.ui-dialog .ui-dialog-titlebar-minimize,.ui-dialog .ui-dialog-titlebar-maximize
+	{
+	margin-top: 5px;
+}
+
+/*fixes dialog box close button jumpiness*/
+a.ui-dialog-titlebar-icon:hover {
+	border: none !important;
+	padding: 1px !important;
+}
+
+/* turn off the transition for the close icon in dialog boxes
+unless you want it to stay on after the dialog closes :) */
+a.ui-dialog-titlebar-icon {
+	transition: none;
+	-webkit-transition: none;
+	-moz-transiton: none;
+}
+
+/* center triangle for selectOneMenu
+this may need to be made more specific */
+.ui-selectonemenu .ui-selectonemenu-trigger {
+	padding-top: 7px;
+	padding-left: 0px;
+}
+
+/* remove color from input elements */
+.ui-widget-content select.ui-state-default, .ui-widget-header select.ui-state-default, select.ui-state-default, 
+.ui-widget-content input.ui-state-default, .ui-widget-header input.ui-state-default, input.ui-state-default {
+	background-image:none;
+	background: #ffffff;
+	border: 2px solid #bdc3c7;
+	color: #34495e;
+}
+
+/*datatable headers */
+.ui-datatable th {
+	border: 1px solid #e7e7e7 !important;
+	transition: color .25s ease, border-color .25s ease;
+	-webkit-transition: color .25s ease, border-color .25s ease;
+	-moz-transition: color .25s ease, border-color .25s ease;
+}
+
+/* links inside widgets */
+.ui-widget-content a {
+	color: #16a085;
+}
+
+.ui-widget-content a:hover {
+	color: #1abc9c;
+}
+
+/*end style fixes to accommodate Flat UI Kit and PF */
+
+/* styles for filter */
+.filter {
+	transition: height 5s ease-in-out;
+}
+.filter .panel-title {
+	text-align: center;
+	margin: 15px 0;
+}
+
+.filter h6:first-child {
+	margin-top: 0px;
+}
+
+.filter h6 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.filter .label {
+	width: 100%;
+	display: block;
+}
+
+.filter label {
+	line-height: 1em;
+}
+
+.filter .ui-datalist-data, .filter .ui-list-data .ui-datalist-item{
+	list-style: none;
+}
+
+.tags-wrap .ui-widget-content {
+	padding-bottom: 5px;
+}
+
+.tags-wrap .ui-widget-content a {
+	text-decoration: none;
+	display: block;
+	width: 100%;
+}
+
+.tags-wrap .ui-widget-content a .tag{
+	width: 100%;
+	background: #e7e7e7;
+	background-color: #fff;
+	padding: 3px 5px;
+	border-radius: 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	text-overflow: ellipsis;
+}
+
+.tags-wrap .ui-widget-content a .tag:hover {
+	color: #1abc9c;
+	background-color: #e6e6e6;
+	white-space: normal;
+	overflow: visible;
+	word-break:break-word;
+}
+
+.tags-wrap .ui-widget-content a .tag .glyphicon-remove-circle {
+	top: 3px;
+}
+
+/* end styles for filter */
+/* totals */
+.totals .panel {
+	margin-bottom: 0px;
+	background-color: #1ABC9C;
+	border-color: #1ABC9C;
+	text-align: center;
+	font-size: 16px;
+	line-height: 1;
+}
+
+/* end styles for totals */
+
+/*styles for molecule autocomplete 
+this will probably be expanded to a more generic class
+once more site sections are done*/
+
+/*this top aligns the autocomplete with the totals boxes*/
+.molSearchForm {
+	line-height: 1em;
+}
+
+.molAuto input {
+	/*width: 230px;*/
+}
+
+.molSearchForm .fui-search {
+	position: absolute;
+	top: 8px;
+	left: 260px;
+}
+
+.panelMolAuto .ui-autocomplete-table td {
+	/*I don't like using important, but it works here and shouldn't affect anything else */
+	border: none !important;
+}
+/* end styles for molecule autocomplete*/
+
+/* detail pages */
+.searchTerm {
+	font-size: 0.8em;
+	color: #E74C3C;
+}
+
+.updated {
+	font-size: .8em;
+	color: #E74C3C;
+	text-align: right;
+	font-style: italic;
+	padding-top: 10px;
+}
+
+.detailHeading {
+	position: relative;
+	margin-bottom: 5px;
+}
+
+.curated {
+	font-size: .7em;
+}
+
+.ligand-image {
+	max-width: 175px;
+	border: 1px solid #dddddd;
+	float: right;
+	padding: 5px;
+}
+
+.molDialog {
+	line-height: 1.5em;
+}
+
+/* end detail pages */
+
+/* compact styles for things like registration page */
+.compact,.compact p {
+	font-size: 14px;
+	line-height: 1em;
+}
+
+.compact .form-group {
+	margin-bottom: 10px;
+}
+
+.compact label {
+	margin-bottom: 0px;
+	font-weight: bold;
+}
+
+.compact .panel-heading {
+	padding: 8px;
+}
+
+.compact .panel-body {
+	padding: 8px;
+}
+
+/* end compact styles */
+
+/* recaptcha styles */
+#recaptcha_area {
+	margin-top: 5px;
+}
+
+/*general styles */
+.listTable {
+	margin-bottom: 20px;
+}
+
+/*put underlines on links, :) */
+a,a:hover {
+	text-decoration: underline;
+}
+
+/*remove them for breadcrumb, header NURSA and nav */
+.navbar a,.breadcrumb a,.navbar a:hover,.breadcrumb a:hover,.title a,.title a:hover
+	{
+	text-decoration: none;
+}
+
+small, .small {
+	line-height: 1.2em;
+}
+
+/* styles for data display - what we're using inside mol pages, &c. */
+.dataDisplay {
+	position: relative;
+}
+
+.dataDisplay .row {
+	padding: 5px 0px 5px 0px;
+}
+
+/* error message color */
+.error {
+	color: #E74C3C;
+}
+
+.error-image {
+	padding: 15px;
+}
+.error-text {
+	padding-left: 15px;
+	font-size: 190px;
+}
+
+.spacer {height: 20px; display: block;}
+
+/* end general styles */
+
+/* AJAX loading spinner */
+		.ajaxSpinner {
+ 
+  width: 50px;
+  height: 50px;
+  margin: 0px 35px 0px 35px;
+  position: relative;
+  text-align: center;
+  -webkit-animation: rotate 2.0s infinite linear;
+  animation: rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  border-radius: 100%;
+  
+  -webkit-animation: bounce 2.0s infinite ease-in-out;
+  animation: bounce 2.0s infinite ease-in-out;
+}
+
+.dot1 {
+	background-color: #3498DB;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0px;
+  background-color: #1ABC9C;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+@-webkit-keyframes bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+/* end spinner */
+
+/* faqs */
+
+.faq {}
+
+.faqs .lead {
+	margin-bottom: 10px;
+	font-size: 24px;
+}
+
+.faqs .lead:not(:first-child) {
+	padding-top: 10px; 
+}
+
+/* end faqs */
+
+/* Transitional Modify Search */
+.ui-autocomplete-input{
+	font-size: 12px;
+	width: 100%;
+	line-height: 25px;
+	height: 35px;
+	display: block;
+}
+
+
+.ui-datalist-empty-message {
+	display: none;
+}
+
+.formFlterWrap .ui-datalist-data {
+	padding-left: 5px;
+	font-size: 80%
+}
+
+.formFlterWrap input {
+	font-size: 12px;
+}
+
+/* End Transitional Modify Search */
+
+/* Images */
+.image-caption {
+	padding-top: 10px;
+}
+.image-left {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+.bios .image-left, .bios .image-right {
+	margin-bottom: 0;	
+}
+
+.image-right {
+	float: right;
+	margin: 0 0 10px 10px;
+}
+.project-image-wrap {
+	padding: 0 15px 10px 0; 
+}
+/* End images*/
+
+/* jmol */
+#clazzloader-status {
+	display: none;
+}
+/* end jmol */
+
+/* Flat UI overides */
+.noPadding .ui-accordion-content {
+	padding: 0;
+}
+.h5, h5 {
+	font-size: 24px;
+}
+/* End UI overides */
+
+.one-liner-text {
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	overflow: hidden;
+	max-height: 1.8em;
+	line-height: 1.8em;
+}
+
+.twitter-feed {
+	padding: 0;
+}
+.twitter-feed .ui-widget-content {
+	border: none;
+}
+.more-tweets {
+	float:right;
+	font-size:x-small;
+	padding-right: 15px;
+}
+/* No border list */
+.no-border-data-list .ui-widget-content{
+	border: none;
+}

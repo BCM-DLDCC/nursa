@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	template="/WEB-INF/templates/standard.xhtml">
+
+	<ui:define name="title">NURSA - About NURSA</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="About" />
+		</ui:include>
+	</ui:define>"
+	
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="About" outcome="/about/index.jsf" /></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="pageTitle">
+		<h5>FAQs</h5>
+	</ui:define>
+
+	<ui:define name="body">
+		<p:panel header="General" styleClass="primary faqs" toggleable="true" collapsed="false">
+			<a name="General"></a>
+			<ul>
+				<li><a href="#General1">What is NURSA?</a></li>
+				<li><a href="#General2">I am new to the nuclear receptor signaling field. Where can I learn more about it?</a></li>
+				<li><a href="#General3">Can I reuse the video tutorials?</a></li>
+				<li><a href="#General4">How often is information on the site updated?</a></li>
+				<li><a href="#General5">What browsers are recommended for viewing the site?</a></li>
+				<li><a href="#General6">The site is being displayed oddly. What could be causing this?</a></li>
+			</ul>
+			<a name="General1"></a>
+			<div class="clearfix">
+				<p class="lead">What is NURSA?</p>
+				<p>The Nuclear Receptor Signaling Atlas (NURSA) is a co-operative agreement (DK097748) awarded by the National Institute of Diabetes, Digestive and Kidney Diseases to Baylor College of Medicine (BCM), with additional support from the National Institute of Child Health and Development. It supports an Informatics Hub as well as the competitive NURSA Data Source Project program, open annually and funded by subcontracts to individual investigators from BCM.</p>
+				<p>The mission of NURSA is to accrue, develop, and communicate information that advances our understanding of the roles of nuclear receptors (NRs) and coregulators in human physiology and disease. The NURSA website has been developed over the past decade into a comprehensive source of information about NRs and their co-regulators, ligands, and downstream transcriptional targets.</p>
+				<p>New features, enhancements and patches that have not yet been released to this public website may be reviewed at our <a href="https://beta.nursa.org">Beta site</a>. NURSA welcomes feedback on the production and Beta hub websites via its <a href="mailto:support@nursa.org">support@nursa.org</a>.</p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+
+			<a name="General2"></a>
+			<div class="clearfix">
+				<p class="lead">I am new to the nuclear receptor signaling field. Where can I learn more about it?</p>
+				<p>We have created an animated, narrated tutorial describing concepts and models of nuclear receptor signaling. This tutorial has been peer-reviewed and published in Science's Signal Transduction Knowledge Environment (STKE). To cite the tutorial, please reference McKenna NJ and O'Malley BW (2005) An interactive course in nuclear receptor signaling: concepts and models. Sci STKE. <b>2005</b>, tr22. Please click <a href="../flashTutorial/gene/nuclearReceptor/start.jsf" target="_blank">here</a> to view the video tutorial. Please adjust the volume on your speakers before playing the tutorial.</p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+
+			<a name="General3"></a>
+			<div class="clearfix">
+				<p class="lead">Can I reuse the video tutorials?</p>
+				<p>Yes, the tutorials may be reused for non-commercial purposes provided that any such use includes a citation to the above referenced manuscript.</p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+
+			<a name="General4"></a>
+			<div class="clearfix">
+				<p class="lead">How often is information on the site updated?</p>
+				<p>Data from external resources are refreshed every six months through an automated pipeline that extracts, transforms and loads data into the database. Some data, such as clinical trials, then undergo additional manual validation by NURSA curators. The exception is the Transcriptomine target gene search engine, for which datasets are annotated and curated by NURSA staff and uploaded to Transcriptomine on a continuous basis.</p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+
+			<a name="General5"></a>
+			<div class="clearfix">
+				<p class="lead">What browsers are recommended for viewing the site?</p>
+				<p>Recommended browsers are Firefox 24+, Chrome 30+, Safari 5.1.9+, and IE9+. </p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+
+			<a name="General6"></a>
+			<div class="clearfix">
+				<p class="lead">The site is being displayed oddly. What could be causing this?</p>
+				<p>This may be due to a browser issue. We recommend using the following browsers: Firefox 24+, Chrome 30+, Safari 5.1.9+, and IE9+. The NURSA hub uses responsive design, so the site will render slightly differently on smaller mobile devices than it would on larger laptop or desktop screens. It has been optimized for a 15" laptop. For larger or smaller screens on non-mobile devices, you may need to adjust the zoom within your web browser to maximize your user experience. If you are still experiencing display issues please <a href="mailto:support@nursa.org">contact us</a>.</p>
+				<a class="pull-right" href="#General">Back</a>
+			</div>
+		</p:panel>
+		
+		<p:panel header="Molecules" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="Molecules"></a>
+			<ul>
+				<li><a href="#Molecules1">How do I search for a specific molecule?</a></li>
+				<li><a href="#Molecules2">I cannot find a nuclear receptor or coregulator on your website. What should I do?</a></li>
+				<li><a href="#Molecules3">How does NURSA define a nuclear receptor coregulator?</a></li>
+				<li><a href="#Molecules4">What is the NURSA Symbol?</a></li>
+				<li><a href="#Molecules5">What is the difference between a ligand and a drug?</a></li>
+			</ul>
+			<a name="Molecules1"></a>
+			<div class="clearfix">
+				<p class="lead">How do I search for a specific molecule?</p>
+				<p>Click on the molecules box on the homepage or click on molecules in the menu to reach the all molecules page. The search text field is located on the all molecules page just below the breadcrumb trail. Type the molecule symbol or synonym in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected molecule.</p>
+				<a class="pull-right" href="#Molecules">Back</a>
+			</div>
+
+			<a name="Molecules2"></a>
+			<div class="clearfix">
+				<p class="lead">I cannot find a nuclear receptor or coregulator on your website. What should I do?</p>
+				<p>Please use the search text field located on the all molecules and molecule detail pages to find your molecule of interest. Type the molecule symbol or synonym in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected molecule. If you still cannot find your molecule of interest please <a href="mailto:support@nursa.org">contact us</a>.</p>
+				<a class="pull-right" href="#Molecules">Back</a>
+			</div>
+
+			<a name="Molecules3"></a>
+			<div class="clearfix">
+				<p class="lead">How does NURSA define a nuclear receptor coregulator?</p>
+				<p>Nuclear receptor coregulators are molecules that interact with nuclear receptors and are required by nuclear receptors for efficient activation or repression of gene expression. Note that coactivation or corepression are contextual properties that can often coexist in the same molecule, and for this reason NURSA does designate coregulators explicitly as coactivators or corepressors. Inclusion of a molecule in the NURSA coregulator database requires a peer-reviewed publication showing (a) interaction with a nuclear receptor and (b) loss-of-function or gain-of-function data demonstrating its contribution to the activity of a nuclear receptor in a standard cell biology assay.</p>
+				<a class="pull-right" href="#Molecules">Back</a>
+			</div>
+
+			<a name="Molecules4"></a>
+			<div class="clearfix">
+				<p class="lead">What is the NURSA Symbol?</p>
+				<p>Approved gene symbols have been defined for many genes in humans, mouse, rat and other species, and are commonly used in large scale, discovery driven Ôomics studies. In many cases however, these are not in common use in specific fields such as cell biology &#8211; for example, p53 is more commonly referred as p53 than as TP53, its approved symbol. In order to make the website as accessible as possible to as wide a user audience as possible, we use the NURSA Symbol, e.g. p53, to indicate the name in common use in the field, and define the approved symbol, e.g.TP53, in specific ortholog sections of the Molecule Pages. When searching for a molecule in the search text field, the synonyms for a gene will be followed by the NURSA symbol in parentheses, e.g. TP53 (p53).</p>
+				<a class="pull-right" href="#Molecules">Back</a>
+			</div>
+
+			<a name="Molecules5"></a>
+			<div class="clearfix">
+				<p class="lead">What is the difference between a ligand and a drug?</p>
+				<p>The addition of the Drug section to the NURSA Molecule Pages is one of the new features of the website added to make it more accessible to clinicians and physicians in the nuclear receptor signaling field. With a few exceptions, the term ligand in the context of nuclear receptors is classically taken to refer to a molecule that interacts with and modulates that AF-2 function of the nuclear receptor ligand binding domain. Although many well-known drugs &#8211; tamoxifen and cortisol for example, are also classical nuclear receptor ligands, many do not meet this definition, and target other nuclear receptor functions. For this reason. although there are many overlaps, we have annotated Drugs and Ligands separately.</p>
+				<a class="pull-right" href="#Molecules">Back</a>
+			</div>
+		</p:panel>
+		
+		<p:panel header="Datasets" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="Datasets"></a>
+			<ul>
+				<li><a href="#Datasets1">What datasets are included in the NURSA database?</a></li>
+				<li><a href="#Datasets2">I have a dataset I wish to contribute to NURSA, how do I do this?</a></li>
+			</ul>
+			<a name="Datasets1"></a>
+			<div class="clearfix">
+				<p class="lead">What datasets are included in the NURSA database?</p>
+				<p>In the first two funding cycles of NURSA (2002-2012), only datasets funded by the NURSA Consortium were included in the NURSA database. In the current funding cycle (2012-2017) NURSA places no restrictions on the origin of datasets in the database, and these can be associated with any published article, NURSA funded or otherwise.</p>
+				<a class="pull-right" href="#Datasets">Back</a>
+			</div>
+
+			<a name="Datasets2"></a>
+			<div class="clearfix">
+				<p class="lead">I have a dataset I wish to contribute to NURSA, how do I do this?</p>
+				<p>The NURSA Hub is not intended to replace existing, standard public data repositories such as <a target="_blank" href="http://www.ncbi.nlm.nih.gov/geo/">GEO</a>, <a target="_blank" href="http://www.ncbi.nlm.nih.gov/gap">dbGaP</a>, <a target="_blank" href="http://www.genome.gov/encode/">ENCODE</a> or <a target="_blank" href="http://www.proteomexchange.org/">ProteomeXchange</a>. If you would like to have your data integrated within the hub, please deposit your data within an appropriate repository and contact us with the datasets identifier information. If you have generated NR- or coregulator-relevant datasets for which no standard repository exists, please <a href="mailto:support@nursa.org">contact us</a>. </p>
+				<a class="pull-right" href="#Datasets">Back</a>
+			</div>
+		</p:panel>
+
+		<p:panel header="Transcriptomine" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="Transcriptomine"></a>
+			<ul>
+				<li><a href="#Transcriptomine1">What do the numbers in the Fold Change column mean?</a></li>
+				<li><a href="#Transcriptomine2">Where do the data originate?</a></li>
+				<li><a href="#Transcriptomine3">How are fold changes calculated in Transcriptomine?</a></li>
+				<li><a href="#Transcriptomine4">Are fold change values logged or unlogged?</a></li>
+				<li><a href="#Transcriptomine5">Are fold changes cross-normalized across different experiments?</a></li>
+				<li><a href="#Transcriptomine6">How are data annotated?</a></li>
+				<li><a href="#Transcriptomine7">Why does my query generate 0 FCs?</a></li>
+				<li><a href="#Transcriptomine8">Why is my regulatory molecule of interest not in the database?</a></li>
+				<li><a href="#Transcriptomine9">What do the terms KO, KD, KI and OE mean in the Experiment Name?</a></li>
+				<li><a href="#Transcriptomine10">Some experiments are designed as Variable 1 + Variable 2 vs control (e.g. Tamoxifen + E2 vs control). How do I know which variable is responsible for the observed fold change?</a></li>
+				<li><a href="#Transcriptomine11">Why do I get conflicting fold changes for the same transcript under apparently the same condition?</a></li>
+				<li><a href="#Transcriptomine12">Why do some fold changes have no p-values?</a></li>
+			</ul>
+
+			<a name="Transcriptomine1"></a>
+			<div class="clearfix">
+				<p class="lead">What do the numbers in the Fold Change column mean?</p>
+				<p>Experiment Names in Transcriptomine are expressed as </p>
+				<p class="text-center">Condition x vs Condition y</p>
+				<p>The value in the Fold Change column reflects the ratio</p>
+				<p class="text-center">Expression level under Condition x/Expression level in Condition y</p>
+
+				<p>A Fold Change value &gt;1 corresponds to <b>upregulation</b> or <b>induction</b> of the gene in condition x relative to condition y. For example, a fold change of 4.32 for GREB1 in the experiment 17&#946;-estradiol vs control indicates that 17&#946;-estradiol induces GREB1 approximately 4 fold in that experiment. </p>
+
+				<p>A Fold Change value &lt;1 corresponds to <b>down-regulation</b> or <b>repression</b> in condition x relative to condition y. For example, a fold change of 0.5 of NCOA3 in 17&#946;-estradiol vs control indicates that NCOA3 is downregulated 2-fold by 17&#946;-estradiol in that experiment.</p>
+				<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine2"></a>
+			<div class="clearfix">
+			<p class="lead">Where do the data originate?</p>
+
+			<p>A three-part Perl script was used with NCBI's eUtils to identify and download journal abstracts from studies investigating NR, NR ligand and coregulator-dependent gene expression specifically in the context of genome-wide technologies such as microarray and RNA-Seq (see Supplementary File S2 for a list of molecule terms). Fold changes were extracted preferentially from public high throughput database repositories containing full datasets (NCBI Gene Expression Omnibus and EBI ArrayExpress) or, when these were unavailable, were manually retrieved from investigator-curated gene lists published in journal articles and supplementary files.</p>
+
+			<p>For more information see: Ochsner SA, Watkins CM, McOwiti A, Xu X, Darlington YF, Dehart MD, Cooney AJ, Steffen DL, Becnel LB, McKenna NJ. (2012)
+			Transcriptomine: a web resource for nuclear receptor signaling transcriptomes. Physiol Genomics <b>44</b>, 853-63.</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine3"></a>
+			<div class="clearfix">
+			<p class="lead">How are fold changes calculated in Transcriptomine?</p>
+
+			<p>Expression data obtained from GEO and ArrayExpress are the investigator provided summarized and normalized array feature expression intensities available in the series matrix or processed files respectively. The full set of processed and normalized sample expression values provided by the investigator were extracted and processed in the statistical program R. To calculate differential gene expression for investigator-defined experimental contrasts, we used the linear modeling functions from the Bioconductor limma analysis package. Initially, a linear model was fitted to a group-means parameterization design matrix defining each experimental variable. Subsequently, a contrast matrix was fitted which recapitulated the sample contrasts of interest as defined in the study producing fold change and significance values for each array feature present on the array. P-values obtained from Limma analysis were not corrected for multiple comparisons. In cases where a given gene was represented on an array by more than one probeset, data from individual probesets were generated separately and fold change values were not pooled across array features. Where the full raw dataset was unavailable (i.e. had not been deposited in a public repository), fold change and significance values were transcribed directly from journal and supplementary tables as reported by the investigator. For both sources of gene expression data, individual identifiers provided by the investigator or on the array were mapped to the current Entrez Gene identifier.</p>
+
+			<p>For more information see: Ochsner SA, Watkins CM, McOwiti A, Xu X, Darlington YF, Dehart MD, Cooney AJ, Steffen DL, Becnel LB, McKenna NJ. (2012) Transcriptomine: a web resource for nuclear receptor signaling transcriptomes. Physiol Genomics <b>44</b>, 853-63.</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine4"></a>
+			<div class="clearfix">
+			<p class="lead">Are fold change values logged or unlogged?</p>
+
+			<p>Fold changes in TM are unlogged to facilitate their interpretation, especially for those investigators who may not have extensive experience interpreting logged values. For example, a fold change value of 2.0 in TM is equal to a 2-fold increase in expression and a fold change value of 0.5 in TM is equal to a 2-fold decrease in expression.</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine5"></a>
+			<div class="clearfix">
+			<p class="lead">Are fold changes cross-normalized across different experiments?</p>
+
+			<p>Fold changes are not cross-normalized across different experiments in Transcriptomine. Fold changes are inherently comparable across different datasets and do not require normalization. In any case, for many experiments authors do not deposit raw data in public repositories and so unprocessed values, which are required for cross-normalization, are not available. </p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine6"></a>
+			<div class="clearfix">
+			<p class="lead">How are data annotated?</p>
+
+			<p>In addition to basic annotations such as species(human, mouse or rat), gene fold change value, direction, significance and regulating molecule, experiments were annotated for a number of variables known  to be critical determinants of the transcriptional response to NRs and their ligands. (i) Ligand concentration The transcriptional function of NRs is known to be closely linked to the amount of ligand available for binding, and receptor-ligand pairs have been postulated to act as rheostats which function to fine tune the transcriptional response in a given tissue. Moreover, many endocrine-disrupting chemicals (EDCs) such as bisphenol A are biologically active only at concentrations several orders of magnitude higher than natural agonists for the NR in question. As such, the ligand concentration at which regulation of a specific gene is observed is a critical experimental descriptor. (ii) Length of ligand exposure. Experimental systems yield distinct transcriptional profiles based on the length of time they are exposed to NR ligand. Rapid non-genomic signaling by 17&#946;-estradiol, for example, elicits transcriptional responses within minutes that differ fundamentally from those elaborated after multiple hours of exposure, when the genomic effects of liganded estrogen receptors are manifest. (iii) RNA Source. Tissue and cell line identity are important determinants of transcriptional and functional endpoints of NR signaling pathways. For example, the breast cancer drug Tamoxifen, while an estrogen receptor (ER) antagonist in the breast, has partial ER agonist activity in the uterus and ER agonist activity in the skeleton and induction or repression of the same gene by glucocorticoid receptor (GR) agonists has been shown to be a function of cell type. In order to align our RNA source annotations with published standards, we used the EFO Experimental Factor Ontology and the CL cell type ontology where possible.</p>
+
+			<p>For more information see: Ochsner SA, Watkins CM, McOwiti A, Xu X, Darlington YF, Dehart MD, Cooney AJ, Steffen DL, Becnel LB, McKenna NJ. (2012) Transcriptomine: a web resource for nuclear receptor signaling transcriptomes. Physiol Genomics <b>44</b>, 853-63. </p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine7"></a>
+			<div class="clearfix">
+			<p class="lead">Why does my query generate 0 FCs?</p>
+
+			<p>There are two possible explanations for this. </p>
+
+			<p>The first is that the default fold change and significance p-value cut-offs are too strict. While FC = 2 and p &lt;0.05 are common cut-off values they do not serve everyone's purpose. Try relaxing these using the Other option in the pulldown. Selecting Any in the Significance field will retrieve all p-values, including fold changes from experiments with unreported p-values (Not reported), in which the original investigators did not report p-values. Note that Not reported p-values may actually be significant, but because no numerical value was provided in the publication, we are unable to determine whether they are or not.</p>
+
+			<p>The second possibility is simply that the database currently does not contain the data points you are seeking. We are currently making our way through curating a backlog of studies and Transcriptomine is updated on a continuous basis, so it is possible that data points corresponding to your query will be added to the Transcriptomine database in future. </p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine8"></a>
+			<div class="clearfix">
+			<p class="lead">Why is my regulatory molecule of interest not in the database?</p>
+
+			<p>Either we have not yet identified an array in which this molecule is an experimental variable, or we have and it has not yet been added to the database. Please keep checking Transcriptomine regularly.</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine9"></a>
+			<div class="clearfix">
+			<p class="lead">What do the terms KO, KD, KI and OE mean in the Experiment Name?</p>
+
+			<p>These are abbreviations for the experiment design: knockout/null deletion (KO), siRNA or shRNA knockdown (KD), knock-in (KI) and overexpression (OE).</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine10"></a>
+			<div class="clearfix">
+			<p class="lead">Some experiments are designed as Variable 1 + Variable 2 vs control (e.g. Tamoxifen + E2 vs control). How do I know which variable is responsible for the observed fold change?</p>
+
+			<p>These experiments are typically one of a series of experiments which would make more sense when viewed side-by-side with the other experiments in the dataset. A future version of Transcriptomine will give the user the option to view fold changes from multiple experiments in a dataset side by side.</p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine11"></a>
+			<div class="clearfix">
+			<p class="lead">Why do I get conflicting fold changes for the same transcript under apparently the same condition?</p>
+
+			<p>There are several possible reasons for this. </p>
+
+			<p>(a) Differential regulation of a given transcript over time. If the two experiments involve a ligand, check the ligand treatment time for each contrast by clicking on the fold change to open the Fold Change Detail window.</p>
+
+			<p>(b) Differential regulation of a given by different ligand concentrations or doses. The effect of NR ligands has been shown to be concentration-dependent in certain contexts, at least in vitro. If the conflicting fold changes involve a ligand, check the ligand concentration or dose for each contrast by clicking on the fold change to open the Fold Change Detail window.</p>
+
+			<p>(c) Differential regulation of isoforms Alternative regulation of transcripts encoding different isoforms of the same gene has been demonstrated. In experiments where the raw data were available, the specific probeset ID and the array type code are shown in the Identifier (Type) column (refer to FAQ ...... for a list of current array codes and the full names of the arrays). If investigators did not deposit their raw data, but provided GenBank identifiers, these are displayed in the Identifier (Type) column, e.g. NM_014668 (GB). </p>
+
+			<p>Options for resolving array probeset IDs and accession numbers include</p>
+
+			<ul>  
+				<li><a target="_blank" href="http://smd.stanford.edu/cgi-bin/source/sourceSearch">http://smd.stanford.edu/cgi-bin/source/sourceSearch</a></li>  
+				<li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/nuccore">http://www.ncbi.nlm.nih.gov/nuccore</a></li> 
+			</ul>    
+
+			<p>(d) Tissue-specific regulation of a given gene. The number of promoters regulated in a tissue-specific manner has been estimated at 20% of active promoters in the mouse (Barrera et al. (2008) Genome Research <b>18</b>, 46-59) and the opposing effects of GR ligands on a given gene in different tissues have been documented (see Feltus et al. (2002) J Steroid Biochem Mol Biol <b>82</b>, 55-63 and Badrinarayanan et al. (2006) Biochem Cell Biol. <b>84,</b> 745-754). </p>
+			<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+
+			<a name="Transcriptomine12"></a>
+			<div class="clearfix">
+				<p class="lead">Why do some fold changes have no p-values?</p>
+
+				<p>This is for one of two reasons:</p>
+				<ol>
+					<li>If the fold change was retrieved from the published paper, the authors did not provide a p-value in the paper.</li>
+
+					<li>If the fold change was retrieved from a dataset deposited GEO, the dataset did not contain replicates.</li>
+				</ol>
+				<a class="pull-right" href="#Transcriptomine">Back</a>
+			</div>
+		</p:panel>
+
+		<p:panel header="NRS" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="NRS"></a>
+			<ul>
+				<li><a href="#NRS1">What is Nuclear Receptor Signaling (NRS)?</a></li>
+				<li><a href="#NRS2">Why submit to NRS?</a></li>
+				<li><a href="#NRS3">What is Open Access?</a></li>
+				<li><a href="#NRS4">If my article is published, how will it be cited?</a></li>
+				<li><a href="#NRS5">How can I order reprints?</a></li>
+				<li><a href="#NRS6">What is the copyright policy of NRS?</a></li>
+				<li><a href="#NRS7">Do I need permission to reproduce materials published in NRS?</a></li>
+				<li><a href="#NRS8">Is there a printed version of the journal?</a></li>
+				<li><a href="#NRS9">How can I ensure that I receive NRS's emails?</a></li>
+			</ul>
+
+			<a name="NRS1"></a>
+			<div class="clearfix">
+				<p class="lead">What is Nuclear Receptor Signaling (NRS)?</p>
+				<p><em>Nuclear Receptor Signaling </em>publishes primary research articles, reviews, methods and dataset reports in all mechanistic, functional and pathological aspects of nuclear receptor signaling. The Editors-in-Chief welcome submissions representing the broad range of disciplines in this field, including cell biology, biochemistry, physiology, chemistry, pharmacology and informatics, as well as clinical and translational studies. The intent of this journal is to act as a unique, pan-disciplinary home for innovative and insightful research in nuclear receptor signaling.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+			
+			<a name="NRS2"></a>
+			<div class="clearfix">
+				<p class="lead">Why submit to NRS?</p>
+				<p>Submit your research to <a target="_blank" href="http://www.nrsignaling.org/">Nuclear Receptor Signaling</a> to take advantage of:</p>
+				<b>Rapid peer review</b>
+				<p>Our insistence on fast and thorough peer review enables us to process manuscripts quickly; we aim to reach initial decisions within six weeks.</p>
+				<b>Publication immediately on acceptance</b>  
+				<p>All articles are published and receive their final citation details on the day they are accepted. Fully copy-edited and formatted versions of the article replace the accepted manuscript within 4 weeks. </p>
+				<b>Open access</b>  
+				<p>All articles published in <em>Nuclear Receptor Signaling</em> are open access (freely available on the journal website, with the copyright retained by the author). Research articles are deposited in at least one widely and internationally-recognized open access repository complying with the <a target="_blank" href="http://publicaccess.nih.gov/policy.htm">NIH Public Access Policy</a> and the <a target="_blank" href="http://www.wellcome.ac.uk/doc_WTD002766.html">Wellcome Trust Open Access Policy</a>. To cover the cost of open access publishing we levy an article-processing charge.</p>
+				<b>High visibility within the field</b>  
+				<p>Your work is freely accessible to a global audience. In addition, articles are available through INIST in France and in e-Depot, the National Library of the Netherlands' digital archive of all electronic publications. We are also in discussion with other permanent digital archives including the British Library.</p>
+				<b>Permanence</b>
+				<p>All articles published in <em>Nuclear Receptor Signaling</em> are archived in a number of safe open access archives so permanent accessibility is assured.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+			<a name="NRS3"></a>
+			<div class="clearfix">
+				<p class="lead">What is Open Access?</p>
+				<p>All articles published in <em>Nuclear Receptor Signaling</em> are open access, which means they are freely and universally accessible online, and permanently archived in an internationally recognized open access repository, such as PubMed Central.</p>
+				<b>Article-processing charges</b>
+				<p>As the cost of peer reviewing, editing, publishing, maintaining and archiving articles is not recouped through subscription charges, a standard article-processing charge (APC) is levied on all articles that are accepted for publication. The APC is a flat charge, and no additional costs are incurred, for example, by the inclusion of color figures. The current APC for <em>Nuclear Receptor Signaling</em> is £1170/$1990/Û1480.</p>
+				<p>You may be aware that an increasing number of funding agencies strongly encourage open access publication and explicitly allow the use of grants to cover APCs. Some, such as the Wellcome Trust, insist that all research funded by them is open access on publication. </p>
+				<p>In cases where neither the authors nor their institution or funder are able to pay the APC, a discount or waiver may be granted. There is currently an automatic waiver for authors from low or lower-middle income countries (according to <a target="_blank" href="http://www.worldbank.org/data/countryclass/classgroups.htm">World Bank criteria</a>). Requests for waivers should be made as part of the online submission process.</p>
+				<b>Benefits of open access</b>  
+				<ul>
+					<li>Open access articles are freely available via the internet and are therefore more widely visible than articles published behind subscription barriers, with some studies suggesting that on average open access articles are twice as likely to be cited.</li>  
+					<li>Retaining copyright means that authors can reproduce and distribute their work as they choose, for example on their institution's website.</li>  
+					<li>Open access publication benefits the scientific community by making results of research immediately and freely available to all.</li> 
+				</ul> 
+				<a class="pull-right" href="#NRS">Back</a>
+			</div> 
+			
+			<a name="NRS4"></a>
+			<div class="clearfix">
+				<p class="lead">If my article is published, how will it be cited?</p>
+
+				<p>Articles in <em>Nuclear Receptor Signaling</em> should be cited in the same way as articles in a traditional journal. However, because articles in this journal are not printed, they do not have page numbers. Instead, they have a unique article number.</p>
+
+				<p>The following citation:</p>
+
+				<p><em>Nucl Recept Signal</em> 2005, <strong>6</strong>:306</p>
+
+				<p>refers to article 306 from Volume 6 of the journal. </p>
+
+				<p>As an online journal, <em>Nuclear Receptor Signaling</em> does not have issue numbers. Each volume corresponds to a calendar year.</p>
+
+				<p>If my article is published, which bibliographic databases will it be indexed in?</p>
+
+				<p>All articles published in <em>Nuclear Receptor Signaling</em> are included in:</p>
+
+				<ul>  
+					<li>PubMed</li>  
+					<li>PubMed Central</li>
+				</ul>  
+				<p>The full text of all research articles is deposited in digital archives including <a target="_blank" href="http://www.kb.nl/expertise/e-depot-en-digitale-duurzaamheid">e-Depot</a> (The Netherlands).</p>
+
+				<p>The full text of all published research articles is also available on <a target="_blank" href="http://link.springer.com/">SpringerLink</a>.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+			<a name="NRS5"></a>
+			<div class="clearfix">
+				<p class="lead">How can I order reprints?</p>
+
+				<p>As all articles are open access, readers are free to download and/or print copies from the website, according to the terms of the <a target="_blank" href="http://creativecommons.org/licenses/by/2.0">Creative Commons Attribution License.</a></p>
+
+				<p>If, however, you require high quality, bound reprints of research articles, <em>Nuclear Receptor Signaling</em> offers a fast, professional reprint service, and reprints can be ordered by contacting <a href="mailto:support@nursa.org">support@nursa.org</a>.</p>
+
+				<p>Authors can order reprints of their own articles published in <em>Nuclear Receptor Signaling</em> by sending an email to <a href="mailto:support@nursa.org">support@nursa.org</a>.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+			
+			<a name="NRS6"></a>
+			<div class="clearfix">
+				<p class="lead">What is the copyright policy of NRS?</p>
+
+				<p>All articles published in <em>Nuclear Receptor Signaling</em> are open access, which means the articles are universally and freely available online. In addition, the authors retain copyright of their article, and grant any third party the right to use reproduce and disseminate the article, subject to the terms of our copyright and license agreement. Allowing the authors to retain copyright of their work permits wider distribution of their work on the condition it is correctly attributed to the authors.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+			
+			<a name="NRS7"></a>
+			<div class="clearfix">
+				<p class="lead">Do I need permission to reproduce materials published in NRS?</p>
+
+				<p>Illustrations, figures or tables from any article may be reproduced in any format or medium, provided that Nuclear Receptor Signaling is duly identified as the original publisher, and that proper attribution of authorship and correct citation details are given.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+
+			<a name="NRS8"></a>
+			<div class="clearfix">
+				<p class="lead">Is there a printed version of the journal?</p>
+
+				<p><em>Nuclear Receptor Signaling</em> is published online only. If you wish to print out a copy of an article, we recommend you select the PDF version of the article online. PDFs of all articles have been formatted in a way that is ideal for printing, so, if you prefer, articles don't have to be read on screen.</p>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div>
+
+			<a name="NRS9"></a>
+			<div class="clearfix">
+				<p class="lead">How can I ensure that I receive NRS's emails?</p>
+
+				<p>Occasionally, email sent by Nuclear Receptor Signaling may be caught by spam filters. Most modern email software includes a spam or junk folder, and it is worth checking this from time to time. </p> 
+
+				<p>If you find emails from Nuclear Receptor Signaling in your spam or junk folder, you can tell your mail program that it is not spam by hitting the &quot;Not spam&quot; or &quot;Not junk&quot; button, and most mail programs will learn from this and will be less likely to misclassify subsequent emails. </p>
+
+				<p> In order to guarantee that mail from Nuclear Receptor Signaling does not get caught by your spam filters, most systems also make it possible to create a list of trusted senders. </p>
+				
+				<p> Instructions are provided below for how to add Nuclear Receptor Signaling to your trusted sender list using Outlook , Apple Mail, Thunderbird, Gmail, Hotmail, Yahoo and Postini. Even if your ISP or email program is not listed, a similar approach will generally be possible. </p>
+
+				<p><b>Microsoft Outlook</b> </p>
+
+				<ol>  
+					<li>On the Tools menu, click Options</li>  
+					<li>On the Preferences tab, click Junk E-mail</li>  
+					<li>On the Safe Senders tab, click Add</li>  
+					<li>Where it says Add address enter <b>editorial@nuclearreceptorsignaling.com</b></li> 
+					<li>Click OK</li> 
+				</ol>  
+
+				<p><b>Apple Mail</b></p>
+
+				<ol>  
+					<li>Go to Mail &gt; Preferences from your Mail menu</li>  
+					<li>Go to the Rules tab</li>  
+					<li>Select Add Rule</li>  
+					<li>Give this rule a name such as &quot;Nuclear Receptor Signaling&quot;</li>  
+					<li>Create a rule that says &quot;If any of the following conditions are met: 'From' 'Contains'&quot; and then enter <b>editorial@nuclearreceptorsignaling.com</b></li>  
+					<li>From the actions, select 'Move message' to mailbox 'Inbox'.</li>  
+					<li>Click &quot;OK&quot;</li> 
+				</ol>  
+
+				<p><b>Thunderbird</b> </p>
+
+				<ol>  
+					<li>Click the Address Book button</li>  
+					<li>Highlight the Personal Address Book</li>  
+					<li>Click on &quot;New Contact&quot;</li>  
+					<li>In the &quot;Contact&quot; tab of the new card, enter <b>editorial@nuclearreceptorsignaling.com</b> to the email field</li>  
+					<li>Click &quot;Ok&quot;</li>  
+					<li>Select &quot;Account settings &gt; Junk Settings&quot; from the side menu</li><li>Select &quot;Enable adaptive junk mail controls for this account&quot; and &quot;Personal Address book&quot;</li>  
+					<li>Click &quot;Ok&quot;</li> 
+				</ol>
+
+				<p><b>Gmail</b></p>
+
+				<ol>  
+					<li>At the top right of the page, go to Settings, Filters, Create a new filter</li>  
+					<li>Where it says From, enter <b>editorial@nuclearreceptorsignaling.com</b></li>
+					<li>Click &quot;Next Step&quot;</li>
+					<li>Click the box Never send it to Spam </li>
+					<li>Click Create Filter</li> 
+				</ol>
+
+				<p><b>Hotmail</b></p>
+
+				<ol>  
+					<li>At the top right of the page, go to &quot;Options, More options</li>  
+					<li>Click Safe and blocked senders</li>  
+					<li>Click Safe senders </li>  
+					<li>Where it says: Sender or domain to mark as safe: enter <b>editorial@nuclearreceptorsignaling.com</b></li>  
+					<li>Click the &quot;Add&quot;</li> 
+				</ol>  
+
+				<p><b>Yahoo!</b> </p>
+
+				<ol>  
+					<li>At the top left of the page click &quot;Mail Options&quot;</li>
+					<li>Select 'Filters' (in the bottom left corner)</li>
+					<li>On the Filters page, click &quot;Add&quot;</li>
+					<li>Add Filter Name</li>  
+					<li>Select the Sender, and add &quot;contains&quot; then enter <b>editorial@nuclearreceptorsignaling.com</b></li>  
+					<li>Click the (&quot;Choose Folder&quot;) pull down menu and select 'Inbox'</li>  
+					<li>Select Save</li> 
+				</ol>  
+
+				<p><b>Postini</b> </p>
+
+				<ol> 
+					<li>Log into your Postini account</li>  
+					<li>Go to My settings, and then to Approved senders</li>  
+					<li>In the Approved domains box, add <b>editorial@nuclearreceptorsignaling.com</b></li><li>Click Update approved domains</li> 
+				</ol>
+				<a class="pull-right" href="#NRS">Back</a>
+			</div> 
+		</p:panel>
+
+		<p:panel header="Reagents" styleClass="primary faqs" toggleable="true" collapsed="true">
+		<a name="Reagents"></a>
+			<ul>
+				<li><a href="#Reagents1">How do I search for a specific reagent?</a></li>
+				<li><a href="#Reagents2">I cannot find a specific reagent on your website. What should I do?</a></li>
+			</ul>
+
+			<a name="Reagents1"></a>
+			<div class="clearfix">
+				<p class="lead">How do I search for a specific reagent?</p>
+
+				<p>Click on the reagents box on the homepage or click on reagents in the menu to reach the all reagents page. The search text field is located on the all reagents page just below the breadcrumb trail. Type the reagent name in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected reagent.</p>
+				<a class="pull-right" href="#Reagents">Back</a>
+			</div>
+
+			<a name="Reagents2"></a>
+			<div class="clearfix">
+				<p class="lead">I cannot find a specific reagent on your website. What should I do?</p>
+
+				<p>Please use the search text field located on the all reagents and reagent detail pages to find your reagent of interest. Type the reagent name in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected reagent. If you still cannot find your reagent of interest please <a href="mailto:support@nursa.org">contact us</a>.</p>
+				<a class="pull-right" href="#Reagents">Back</a>
+			</div>
+		</p:panel>
+
+		<p:panel header="Clinical" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="Clinical"></a>
+			<ul>
+				<li><a href="#Clinical1">How do I search for a specific clinical trial, disease or drug?</a></li>
+				<li><a href="#Clinical2">I cannot find a specific clinical trial, disease or drug on your website. What should I do?</a></li>
+				<li><a href="#Clinical3">What is the relationship between clinical trials and associated molecules?</a></li>
+			</ul>
+
+			<a name="Clinical1"></a>
+				<div class="clearfix">
+				<p class="lead">How do I search for a specific clinical trial, disease or drug?</p>
+				<a class="pull-right" href="#Clinical">Back</a>
+			</div>
+
+			<p>Click on the clinical box on the homepage or click on clinical in the menu to reach the all clinical page. The search text field is located on the all clinical page just below the breadcrumb trail. Type the clinical trial, disease or drug name in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected clinical trial, disease or drug.</p>
+
+			<a name="Clinical2"></a>
+			<div class="clearfix">
+				<p class="lead">I cannot find a specific clinical trial, disease or drug on your website. What should I do?</p>
+				<p>Please use the search text field located on the all clinical and clinical detail pages to find your clinical trial, disease or drug of interest. Type the clinical trial, disease or drug name in the search text field and then select the correct term from the autogenerated list. You will then be directed to the detail page for the selected clinical trial, disease or drug. If you still cannot find your clinical trial, disease or drug of interest, please <a href="mailto:support@nursa.org">contact us</a>.</p>
+				<a class="pull-right" href="#Clinical">Back</a>
+			</div>
+
+			<a name="Clinical3"></a>
+			<div class="clearfix">
+				<p class="lead">What is the relationship between clinical trials and associated molecules?</p>
+				<p>Clinical trials' data was mined to extract protocols for which there was a validated gene-disease or gene-drug association. Through this extraction methodology, any trial that mapped to a disease or condition that has a known association with a nuclear receptor or coregulator, or that utilized a drug targeting a nuclear receptor or coregulator was included. Extracted records were manually reviewed by NURSA curators. If you find any clinical trial that you believe should not be included on the website or that is missing, please <a href="mailto:support@nursa.org">contact us</a>.</p>
+				<a class="pull-right" href="#Clinical">Back</a>
+			</div>			
+		</p:panel>
+
+		<p:panel header="Funding" styleClass="primary faqs" toggleable="true" collapsed="true">
+			<a name="Funding"></a>
+			<ul>
+				<li><a href="#Funding1">What funding opportunities are available through NURSA?</a></li>
+				<li><a href="#Funding2">How many NDSPs are funded in each cycle?</a></li>
+				<li><a href="#Funding3">What are the total costs allowed for NDSPs?</a></li>
+				<li><a href="#Funding4">What is the funding period of each NDSP?</a></li>
+				<li><a href="#Funding5">How many funding cycles per year are provided?</a></li>
+				<li><a href="#Funding6">How can I apply for an NDSP</a></li>
+				<li><a href="#Funding7">When is the next round of NDSP awards?</a></li>
+				<li><a href="#Funding8">What are the terms of receiving the award?</a></li>
+				<li><a href="#Funding9">Who is eligible to apply for funding?</a></li>
+				<li><a href="#Funding10">My LOI was accepted. How do I submit my proposal?</a></li>
+			</ul>
+			<a name="Funding1"></a>
+			<div class="clearfix">
+				<p class="lead">What funding opportunities are available through NURSA?</p>
+
+				<p>NURSA provides funding for pilot and feasibility (P&amp;F) awards as part of its NURSA Data Source Projects (NDSP) arm. These awards are made possible largely through support from the NIDDK and also NICHD. The NURSA Bioinformatics Hub facilitates the P&amp;F awards through the RFP notifications and online applications on its web portal (www.nursa.org). As RFPs are released, the NDSPs will be openly competed and peer reviewed. Each funding cycle will have one or two focus areas, which are selected by members of the NIDDK and a steering committee. Please view our <h:link value = "NDSP RFP" outcome = "/funding/ndsp_rfp.jsf"/> page to learn more about upcoming, current and past RFPs. To learn more about funded NDSP projects, please see our <h:link value = "NURSA-funded Projects" outcome = "/funding/nursa_projects.jsf"/> page.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+
+			<a name="Funding2"></a>
+			<div class="clearfix">
+				<p class="lead">How many NDSPs are funded in each cycle?</p>
+				<p>We expect to fund 3-4 NDSPs (for 1 year with additional years dependent on progress and availability of funds).</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding3"></a>
+			<div class="clearfix">
+				<p class="lead">What are the total costs allowed for NDSPs?</p>
+				<p>Total costs for each NDSP cannot exceed $150,000/year for 1-2 years.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding4"></a>
+			<div class="clearfix">
+				<p class="lead">What is the funding period of each NDSP?</p>
+
+				<p>One year with an additional year dependent on progress and availability of funds.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding5"></a>
+			<div class="clearfix">
+				<p class="lead">How many funding cycles per year are provided?</p>
+
+				<p>One funding cycle is provided each year. </p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding6"></a>
+			<div class="clearfix">
+				<p class="lead">How can I apply for an NDSP?</p>
+
+				<p>Interested investigators should e-mail a letter of intent containing a short (quarter page) description of the project and a statement of intent to apply, to <a href="mailto:margolisr@extra.niddk.nih.gov">Ronald Margolis</a>, NIDDK NURSA Project Scientist and/or <a href="mailto:nmckenna@bcm.edu">Neil McKenna</a>, NURSA co-Principal Investigator prior to the deadline for letter of intent.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding7"></a>
+			<div class="clearfix">
+				<p class="lead">When is the next round of NDSP awards?</p>
+
+				<p>A new NDSP cycle is typically announced around January. Please check our <h:link value = "NDSP RFP" outcome = "/funding/ndsp_rfp.jsf"/> page often for updated information, follow us on <a target="_blank" href="https://twitter.com/NURSATweets">Twitter</a> or <a href="mailto:support@nursa.org">contact us</a> to sign-up for our newsletter.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding8"></a>
+			<div class="clearfix">
+				<p class="lead">What are the terms of receiving the award? </p>
+
+				<p>NDSP investigators must utilize the Hub for submitting proposals, distributing information about NURSA-funded reagents and sharing NURSA-funded datasets. It is expected that funded investigators must freely share NURSA-funded reagents with other researchers upon request, but NDSP investigators may charge a nominal fee for reimbursing their expenses for reagent processing and shipping. Further, NDSP PIs will serve as members of the NURSA Steering Committee, with bimonthly meetings.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding9"></a>
+			<div class="clearfix">
+				<p class="lead">Who is eligible to apply for funding?</p>
+
+				<p>All investigators including new and early stage investigators are encouraged to apply. Because NDSPs are intended to explore and impact in 1-2 years key issues within the NR research community, successful applicants must demonstrate that they have other existing sources of support.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+			
+			<a name="Funding10"></a>
+				<div class="clearfix">
+				<p class="lead">My LOI was accepted. How do I submit my proposal?</p>
+
+				<p>Details for how to submit a proposal in response to the NDSP announcement, including a template for preparation of the application, will be made available to investigators who submit an approved letter of intent. Applications will be short (6 pages maximum) to allow investigators time to meet the submission deadline.</p>
+				<a href="#Funding" class="pull-right">Back</a>
+			</div>
+		</p:panel>
+	</ui:define>
+</ui:composition>

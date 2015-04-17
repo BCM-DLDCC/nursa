@@ -1,0 +1,85 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	xmlns:func="http://bcm.edu.dldcc.big/nursa/functions"
+	template="/WEB-INF/templates/masterList.xhtml">
+
+	<ui:define name="title">NURSA - Clinical</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Clinical" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Clinical" outcome="/clinical/index.jsf" /></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="autocomplete">
+		<sc:translationalSearch />
+	</ui:define>
+
+	<ui:define name="filter">
+		<sc:translationalFilter id="translationalsearchComponent" />
+	</ui:define>
+
+	<ui:define name="listing">
+
+		<h:form id="translationalListing">
+			<p:dataTable id="translationalResults" var="translationalResult" paginator="true"
+				value="#{translationalSearchService.searchResults}"
+				emptyMessage="No translationals found for the search criteria"
+				sortMode="multiple"
+				paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+				rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+				lazy="true">
+
+				<!-- TYPE -->
+				<p:column width="100" sortBy="#{translationalResult.type}" id="typeColumn">
+					<f:facet name="header">
+						<h:outputText value="Type" />
+					</f:facet>
+					<h:outputText value="#{translationalResult.type}" />
+				</p:column>
+
+				<!-- NAME -->
+				<p:column sortBy="#{translationalResult.name.name}" width="200" id="nameColumn">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:link value="#{translationalResult.name}" outcome="./index.jsf">
+						<f:param name="doi" value="#{translationalResult.doi}" />
+					</h:link>
+				</p:column>
+				
+				<!-- SOURCE -->
+				<p:column sortBy="#{translationalResult.source}" width="200" id="sourceColumn">
+					<f:facet name="header">
+						<h:outputText value="Source" />
+					</f:facet>
+					<h:outputText value="#{translationalResult.source}" />
+				</p:column>
+			</p:dataTable>
+
+			<layout:blockUI block = ":translationalListing" trigger = ":translationalListing:translationalResults" widgetVar = "translationalBlock"/>
+
+		</h:form>
+
+		<script>
+			$($("#translationalTotal").text("#{translationalSearchService.searchResults.rowCount}"))
+			$($("#clinicalTrialTotal").text("#{translationalSearchService.searchResults.translationalBreakdown.containsKey('Clinical Trial')? translationalSearchService.searchResults.translationalBreakdown['Clinical Trial']:0}"))
+			$($("#diseaseTotal").text("#{translationalSearchService.searchResults.translationalBreakdown.containsKey('Disease')? translationalSearchService.searchResults.translationalBreakdown['Disease']:0}"))
+			$($("#drugTotal").text("#{translationalSearchService.searchResults.translationalBreakdown.containsKey('Drug')? translationalSearchService.searchResults.translationalBreakdown['Drug']:0}"))
+		 </script>
+	</ui:define>
+
+</ui:composition>

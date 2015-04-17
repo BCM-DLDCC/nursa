@@ -1,0 +1,85 @@
+body {
+	background-color: #F4F4F4;
+}
+.titleBar {
+	background-color: #F4F4F4;
+	height: 100px;
+	width: 100%;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	position: fixed;
+	z-index: 100;
+}
+
+.pageTop {
+	width: 1200px;
+	height: 100px;
+	margin: 0 auto;
+	display: block;
+	background-color: #F4F4F4;
+}
+
+.nursaLogo {
+	width: 100px;
+	height: 100px;
+	background: url("#{resource['gfx:nursaLogo.gif']}") no-repeat center;
+	float: left;
+}
+
+.nrsLogo {
+	width: 1000px;
+	height: 100px;
+	background: url("#{resource['gfx:nrsLogo.gif']}") no-repeat left bottom;
+	float: center;
+}
+
+.socialArea {
+	background-color: #33ABCD;
+	width: 50px;
+	height: 100px;
+	position: fixed;
+	top: 100px;
+	left: 50%;
+	z-index: 100;
+	margin-left: -550px;
+}
+
+.mainContent {
+	background-color: #ffffff;
+	width: 1000px;
+	min-height: 600px;
+	top: 100px;
+	display: block;
+	position: relative;
+}
+.gallery {
+	top: 0px;
+	width: 100%;
+	min-height: 400px;
+	background-color: black;
+}
+
+.jmsContentsColumn {
+	width: 325px;
+	float: left;
+	background: #bfb;
+	background-color: yellow;
+	min-height: 400px;
+}
+
+.jmsContentsColumn1 {
+	margin-left: 0px;
+	margin-right: 5px;
+}
+
+.jmsContentsColumn2 {
+	margin-left: 7.5px;
+	margin-right: 7.5px;
+}
+
+.jmsContentsColumn3 {
+	float: right;
+	margin-left: 5px;
+	margin-right: 0px;
+}

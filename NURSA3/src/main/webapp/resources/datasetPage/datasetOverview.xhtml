@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:func="http://bcm.edu.dldcc.big/nursa/functions"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout">
+
+	<composite:interface>
+		<composite:attribute name="dataset"
+			type="edu.bcm.dldcc.big.nursa.model.dataset.NURSADataset"
+			displayName="A Dataset object" required="true" />
+		
+	</composite:interface>
+	<composite:implementation>
+	<h:form>
+		<div id="#{cc.clientId}">
+<ui:remove><!--   
+			<p:accordionPanel dynamic="true" cache="true">
+				<p:ajax event="tabChange" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+--></ui:remove>
+        		<p:panel header="Overview" toggleable="false" collapsed="false">
+        			<p:ajax event="toggle" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+					<div class="dataDisplay">
+						<layout:dataRow label="Description :" data="#{cc.attrs.dataset.description}" />
+						<layout:dataRow label="Dataset Type :" data="#{cc.attrs.dataset.type}" />
+						<layout:dataRow label="Tissue/Cell lines :" collection="#{cc.attrs.dataset.cellLine}" />
+						<layout:dataRow label="Species :" data="#{cc.attrs.dataset.species.commonName}" />
+						<layout:dataRow label="Data Source :" data="#{cc.attrs.dataset.dataSource}" />
+						<layout:pubmedDataRow label="References:" collection="#{cc.attrs.dataset.references}" 
+						pubmed="pubmedId" citation="citation" volume="volume" pagination="pagination"/>
+					
+						<layout:dataRow label="DOI :" data="#{cc.attrs.dataset.doi.doi}" />
+					</div>
+					
+						
+					<p:panel rendered="#{not empty cc.attrs.dataset.fileID}">
+					NURSA and its funded NDSP PIs have chosen to share their data with NURSA bioinformatics hub end users without restriction. By clicking “Download” below, you agree to reference both the dataset’s publication listed on this webpage, or if not applicable to acknowledge the PI, and the NURSA website within any publications that include results or secondary analyses of these data.
+						<br/><br/>
+						
+						<div style="margin: 0 auto; width: 50%;">
+							<a href="data/#{cc.attrs.dataset.fileID}" download="#{cc.attrs.dataset.fileID}"> Download #{cc.attrs.dataset.fileName}</a>
+						</div>
+					</p:panel>
+			</p:panel>
+			<p:panel header="Reagents" toggleable="true" collapsed="true">
+				<p:ajax event="toggle" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+				<p class="curated">Reagents for this dataset from NURSA and selected external companies and resources. For further information on obtaining reagents contact individual companies or investigators rather than the NURSA website.</p>
+				
+				<p:dataTable id="reagentSearchResults" var="reagent_" paginator="true"
+				value="#{datasetService.reagentResults}"
+				emptyMessage="No molecules found for the search criteria"
+				sortMode="multiple" paginatorPosition="bottom"
+				paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+				rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+				sortBy="type"
+				lazy="true">
+						<f:facet name="header">NURSA</f:facet>
+                         <p:ajax event="page" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+				        <p:column headerText="Type" sortBy="#{reagent_.type}">
+				            <h:outputText value="#{reagent_.type}" />
+				        </p:column>
+				        <p:column headerText="Name" sortBy="#{reagent_.name}" sortOrder="ascending">
+				            <h:link value="#{reagent_.name}" outcome="./index.jsf">
+							<f:param name="doi" value="#{reagent_.doi}" />
+						</h:link>
+						</p:column>
+				        <p:column headerText="Description">
+				            <h:outputText value="#{reagent_.description}" />
+				        </p:column>
+				        <p:column headerText="Species" sortBy="#{reagent_.speciesCommonName}">
+				            <h:outputText value="#{reagent_.speciesCommonName}" />
+				        </p:column>
+				        <p:column headerText="Source" sortBy="#{reagent_.source}">
+				            <h:outputText value="#{reagent_.source}" />
+				        </p:column>
+        		</p:dataTable>
+        		<p:blockUI trigger="reagentSearchResults" block="reagentSearchResults">
+					Loading content...
+					<div class="ajaxSpinner">
+						<div class="dot1"></div>
+						<div class="dot2"></div>
+					</div>
+				</p:blockUI>
+			</p:panel>
+			<p:panel header="Molecules" toggleable="true" collapsed="true">
+				<p:ajax event="toggle" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+				<p class="curated">Molecules mapping to this dataset.</p>
+				
+				<p:dataTable id="moleculeResults" var="molResult" paginator="true"
+				value="#{datasetService.moleculeSearchResults}"
+				emptyMessage="This dataset has no   molecules mapped to it at this time"
+				sortMode="multiple" paginatorPosition="bottom"
+				paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+				rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+				sortBy="name"
+				lazy="true">
+				<f:facet name="header">NURSA</f:facet>
+				 <p:ajax event="page" onstart="$.blockUI()" oncomplete = "$.unblockUI()"/>
+				        <p:column headerText="Symbol" sortBy="#{molResult.name}">
+				        	<h:link value="#{molResult.name}" outcome="./index.jsf">
+							<f:param name="doi" value="#{molResult.doi}" />
+							</h:link>
+				        </p:column>
+				        <p:column headerText="Description">
+				            <h:outputText value="#{func:truncateToWord(molResult.description,100)}"/>
+						</p:column>
+				</p:dataTable>
+				<p:blockUI trigger="moleculeResults" block="moleculeResults">
+					Loading content...
+					<div class="ajaxSpinner">
+						<div class="dot1"></div>
+						<div class="dot2"></div>
+					</div>
+				</p:blockUI>
+			</p:panel>
+		</div>
+		</h:form>
+	</composite:implementation>
+
+</ui:composition>

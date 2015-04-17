@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="/WEB-INF/templates/template.xhtml" xmlns:p="http://primefaces.org/ui">
+	<ui:define name="body">
+	 <p:focus context="loginPanel"/> 
+		<p:panel style="width:400px;margin:auto;left:50%;" id="loginPanel">
+			<f:facet name="header">Login</f:facet>
+			<h:form id="loginForm">
+
+				<p>Please login here</p>
+
+				<div class="dialog">
+					<h:panelGrid columns="2" rowClasses="prop" columnClasses="name,value">
+						<h:outputLabel for="username">Username</h:outputLabel>
+						<p:inputText id="username" value="#{credentials.username}" />
+						<h:outputLabel for="password">Password</h:outputLabel>
+						<p:password id="password" value="#{credentials.password}" />
+					</h:panelGrid>
+				</div>
+				<div style="clear: both" />
+				<rich:panel style="border-style:none;border-width:0px;">
+					<div class="buttonRight">
+						<p:commandButton id="login" value="Login" action="#{identity.login}" ajax="false"/>
+					</div>
+				</rich:panel>
+				<div style="clear: both" />
+			</h:form>
+		</p:panel>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,73 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:mp="http://java.sun.com/jsf/composite/moleculePage"
+	xmlns:tp="http://java.sun.com/jsf/composite/translationalPage"
+	xmlns:cc="http://java.sun.com/jsf/composite/commonComponents"
+	xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/detail.xhtml">
+	
+	<!-- let's shorten our variable for easier and cleaner coding -->
+	<ui:param name="mol" value="#{moleculeService.selectedMolecule}" />
+	
+	<ui:define name="title">NURSA | #{mol.official.name} - 
+	#{mol.name}
+	</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Molecules" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Molecules" outcome="/molecules/index.jsf" /></li>
+			<li><h:link value="Ligands"
+					outcome="/molecules/index.jsf">
+					<f:param name="molType" value="Ligand" />
+				</h:link></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="autocomplete">
+		<sc:moleculeSearch />
+	</ui:define>
+
+	<ui:define name="detail">
+
+		<p:messages id="messages" />
+
+		<!-- render only if we have a molecule -->
+		<h:panelGroup layout="block" rendered="#{!empty mol}">
+
+			<!-- symbol -->
+			<div class = "detailHeading">
+				<h5>#{mol.official.name}</h5>
+			</div>
+			
+			<!-- overview -->
+			<mp:ligandView molecule="#{mol}" />
+			
+			<!-- <mp:crystalStructureView molecule="#{mol}" /> -->
+			<mp:proteinBindingView molecule="#{mol}" />
+			<!-- DATASETS -->
+			<mp:datasetsView molecule="#{mol}" />
+			<!-- <tp:clinicalTrialView drug="#{mol.compound}" rendered="#{mol.compound.type eq 'Drug'}"/> -->
+			<tp:drugPharmacology drug="#{mol.compound}" curatorText="Pharmacological properties of this ligand as curated by DrugBank." rendered="#{mol.compound.type eq 'Drug'}"/>
+			<tp:drugCarrier curatorText="Proteins that act as carriers of this ligand as curated by DrugBank." drug="#{mol.compound}" rendered="#{mol.compound.type eq 'Drug'}"/>
+			<tp:drugEnzyme curatorText="Enzymatic reactions in which this ligand is a substrate or product as curated by DrugBank." drug="#{mol.compound}" rendered="#{mol.compound.type eq 'Drug'}"/>
+			<tp:drugTarget curatorText="Drug targets of this ligand as curated by DrugBank." drug="#{mol.compound}" rendered="#{mol.compound.type eq 'Drug'}"/>
+			<tp:drugTransporter curatorText="Proteins that mediate transmembrane transport of this ligand as curated by DrugBank." drug="#{mol.compound}" rendered="#{mol.compound.type eq 'Drug'}"/>
+
+			<!-- LITERATURE -->
+			<mp:literatureView molecule="#{mol}" />
+		</h:panelGroup>
+
+	</ui:define>
+	</ui:composition>

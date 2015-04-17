@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ac="http://java.sun.com/jsf/composite/annotationComponents">
+	<p:growl showDetail="true" autoUpdate="true" sticky="false" />
+	<h:form id="nrForm">
+		<p:outputPanel style="min-width: 800px; min-height: 600px;"
+			id="nrTabPanel">
+			<p:panel size="100" minSize="40" maxSize="200">
+				<p:panelGrid>
+					<p:row>
+						<p:column>
+							<h:outputText value="Search for Nuclear Receptors" />
+						</p:column>
+						<p:column>
+							<p:autoComplete
+								value="#{nuclearReceptorController.selectedNuclearReceptor}"
+								completeMethod="#{nuclearReceptorController.completeNuclearReceptor}"
+								var="nr" itemLabel="#{nr.name}" itemValue="#{nr}"
+								converter="nuclearReceptorConverter" forceSelection="true">
+								<p:ajax listener="#{nuclearReceptorController.startConversation}" event="itemSelect" update="nrArea" />
+							</p:autoComplete>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+			</p:panel>
+			<!-- NR AREA -->
+			<p:panel id="nrArea"
+				visible="#{nuclearReceptorController.selectedNuclearReceptor ne null}">
+				<p:panelGrid>
+					<p:row>
+						<p:column>
+							<h:outputText value="Name: " styleClass="labelText" />
+						</p:column>
+						<p:column>
+							<h:outputText
+								value="#{nuclearReceptorController.selectedNuclearReceptor.name}"
+								styleClass="informationText" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<!-- LIST OF ALL THE ANNOTATIONS -->
+				<p:panel header="At A Glance" toggleable="true" collapsed="true"
+					visible="#{nuclearReceptorController.containsAnnotationClass('edu.bcm.dldcc.big.nursa.common.model.example.annotations.OverviewAnnotation')}">
+
+					<ac:OverviewAnnotationView
+						overViewAnnotation="#{nuclearReceptorController.getAnnotationClass('edu.bcm.dldcc.big.nursa.common.model.example.annotations.OverviewAnnotation')}" />
+				</p:panel>
+				<p:panel header="Orthologs" toggleable="true" collapsed="true"
+					visible="#{nuclearReceptorController.containsAnnotationClass('edu.bcm.dldcc.big.nursa.common.model.example.annotations.OrthologAnnotation')}">
+					<ac:OrthologAnnotationView
+						orthologAnnotation="#{nuclearReceptorController.getAnnotationClass('edu.bcm.dldcc.big.nursa.common.model.example.annotations.OrthologAnnotation')}" />
+				</p:panel>
+				<!-- Add Annotation -->
+				<p:panel>
+					<p:commandButton icon="ui-icon-plus"
+						action="#{nuclearReceptorController.addAnnotation}"
+						update="editNRAnnotation"
+						oncomplete="editNRAnnotationWidget.show()" process="@this"
+						title="Add Annotation" />
+				</p:panel>
+			</p:panel>
+		</p:outputPanel>
+		<!-- Action Buttons -->
+		<p:panel>
+			<p:commandButton icon="ui-icon-pencil"
+				action="#{nuclearReceptorController.edit}" update="editNR"
+				oncomplete="editNRWidget.show()" process="@this" title="Edit" />
+			<p:commandButton icon="ui-icon-plus"
+				action="#{nuclearReceptorController.add}" update="editNR"
+				oncomplete="editNRWidget.show()" process="@this" title="Add" />
+
+		</p:panel>
+
+
+		<p:dialog id="editNR" header="Edit Nuclear Receptor"
+			widgetVar="editNRWidget" resizable="false" modal="true">
+			<p:panelGrid>
+				<p:row>
+					<p:column>
+						<h:outputText value="Name: " styleClass="labelText" />
+					</p:column>
+					<p:column>
+						<p:inputText
+							value="#{nuclearReceptorController.selectedNuclearReceptor.name}"
+							styleClass="informationText" />
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+
+			<div style="clear: both" />
+			<!-- Action Buttons -->
+			<div class="buttonRight">
+				<p:commandButton value="Cancel"
+					action="#{nuclearReceptorController.cancel}"
+					oncomplete="editNRWidget.hide()" process="@none" />
+				<p:commandButton value="Save"
+					action="#{nuclearReceptorController.save}" update="nrArea"
+					oncomplete="editNRWidget.hide()" process="@parent" />
+			</div>
+			<div style="clear: both" />
+
+		</p:dialog>
+
+		<p:dialog id="editNRAnnotation"
+			header="Edit Nuclear Receptor Annotation"
+			widgetVar="editNRAnnotationWidget" resizable="false" modal="true">
+			<p:panelGrid>
+				<p:row>
+					<p:column>
+						<h:outputText value="Type: " styleClass="labelText" />
+					</p:column>
+					<p:column>
+						<p:selectOneMenu id="annotationType"
+							value="#{nuclearReceptorController.annotationChocie}">
+							<f:selectItem itemLabel="Select Annotation Type" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems
+								value="#{nuclearReceptorController.annotationChoices.keySet()}" />
+							<p:ajax update="editAnnotationArea"
+								listener="#{nuclearReceptorController.onAnnotationChoice}"
+								oncomplete="editNRAnnotationWidget.initPosition();" />
+						</p:selectOneMenu>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<div style="clear: both" />
+			<p:outputPanel id="editAnnotationArea">
+				<p:outputPanel
+					rendered="#{nuclearReceptorController.annotationChocie == 'Overview'}">
+					<ac:OverviewAnnotationEdit
+						overViewAnnotation="#{nuclearReceptorController.selectedAnnotation}" />
+				</p:outputPanel>
+				<p:outputPanel
+					rendered="#{nuclearReceptorController.annotationChocie == 'Orthology'}">
+					<ac:OrthologAnnotationEdit
+						orthologAnnotation="#{nuclearReceptorController.selectedAnnotation}" />
+				</p:outputPanel>
+			</p:outputPanel>
+			<div style="clear: both" />
+			<!-- Action Buttons -->
+			<div class="buttonRight">
+				<p:commandButton value="Cancel"
+					action="#{nuclearReceptorController.cancelAnnotation}"
+					onclick="editNRAnnotationWidget.hide()" process="@this" />
+				<p:commandButton value="Save"
+					action="#{nuclearReceptorController.saveAnnotation}"
+					update="nrArea" oncomplete="editNRAnnotationWidget.hide()"
+					process="@parent" />
+			</div>
+			<div style="clear: both" />
+		</p:dialog>
+	</h:form>
+
+</ui:composition>

@@ -1,0 +1,153 @@
+.ontologyClass {
+}
+
+.ontologyClass .ui-tabs-panel {
+	padding: 0px !important;
+}
+
+.menuText {
+	font-size: 15px;
+}
+
+.welcomeTitle {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.welcomeText {
+	color: grey;
+}
+
+.welcomeImage {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+
+.welcomePanel {
+	border-radius: 25px;
+	height: 175px;
+	width: 370px;
+	margin: 8px;
+	position: relative;
+}
+
+.center {
+	margin: auto;
+}
+
+.identityArea {
+	font-size: 20px;
+}
+
+.identityArea a:link {
+	text-decoration: none;
+	color: white;
+}
+
+.identityArea a:visited {
+	text-decoration: none;
+	color: white;
+}
+
+.identityArea a:active {
+	text-decoration: none;
+	color: white;
+}
+
+.identityArea a:hover {
+	text-decoration: underline;
+	color: white;
+}
+
+.WelcomePanels a:link {
+	text-decoration: none
+}
+
+.WelcomePanels a:visited {
+	text-decoration: none
+}
+
+.WelcomePanels a:active {
+	text-decoration: none
+}
+
+.WelcomePanels a:hover {
+	text-decoration: none
+}
+
+.selected-top-menu {
+	color: black;
+	padding: 0px 10px
+}
+
+.not-selected-top-menu {
+	color: grey;
+	padding: 0px 10px
+}
+
+.NavigationMenu {
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+	font-size: 25px;
+}
+
+.NavigationMenu a {
+	
+}
+
+.NavigationMenu a:link {
+	text-decoration: none
+}
+
+.NavigationMenu a:visited {
+	text-decoration: none
+}
+
+.NavigationMenu a:active {
+	text-decoration: none
+}
+
+.NavigationMenu a:hover {
+	text-decoration: underline
+}
+
+.selected-sub-menu {
+	color: white;
+	padding: 0px 5px
+}
+
+.not-selected-sub-menu {
+	color: grey;
+	padding: 0px 5px
+}
+
+.subNavigationMenu {
+	top: 0px;
+	left: 0px;
+	position: relative;
+	font-size: 20px;
+	background: black;
+	display: none;
+}
+
+.subNavigationMenu a {
+	font-size: 20px;
+}
+
+.subNavigationMenu a:link {
+	text-decoration: none
+}
+
+.subNavigationMenu a:visited {
+	text-decoration: none
+}
+
+.subNavigationMenu a:active {
+	text-decoration: none
+}
+
+.subNavigationMenu a:hover {
+	text-decoration: underline
+}

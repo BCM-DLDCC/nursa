@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:cc="http://java.sun.com/jsf/composite/commonComponents"
+	xmlns:tp="http://java.sun.com/jsf/composite/translationalPage"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	template="/WEB-INF/templates/detail.xhtml">
+
+	<!-- let's shorten our variable for easier and cleaner coding -->
+	<ui:param name="translational" value="#{translationalService.selectedTranslational}" />
+	
+	<ui:define name="title">NURSA | #{translational.name.name}
+
+	</ui:define>
+		<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Clinical" />
+		</ui:include>
+	</ui:define>
+	
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Clinical" outcome="/clinical/index.jsf" /></li>
+			<li><h:link value="Drug"
+					outcome="/clinical/index.jsf">
+					<f:param name="translationalType" value="Drug" />
+				</h:link></li>
+		</ul>
+	</ui:define>
+	
+	
+	<ui:define name="autocomplete">
+		<sc:translationalSearch />
+	</ui:define>
+	
+	<ui:define name="detail">
+
+		<p:messages id="messages" />
+
+		<!-- render only if we have a translational -->
+		<h:panelGroup layout="block" rendered="#{!empty translational}">
+			
+			<!-- symbol -->
+			<div class="detailHeading">
+				<h5>#{translational.name.name}</h5>
+			</div>
+			
+			<tp:drugOverview drug="#{translational}" />
+			<tp:drugNomenclature drug="#{translational}" />
+			<tp:drugPharmacology drug="#{translational}" curatorText="Pharmacological properties of this drug as curated by DrugBank." />
+			
+			
+			<tp:drugCarrier curatorText="Proteins that act as carriers of this drug as curated by DrugBank." drug="#{translational}" />
+			<tp:drugEnzyme curatorText="Enzymatic reactions in which this drug is a substrate or product as curated by DrugBank." drug="#{translational}"/>
+			<tp:drugTarget curatorText="Drug targets of this drug as curated by DrugBank." drug="#{translational}"/>
+			<tp:drugTransporter curatorText="Proteins that mediate transmembrane transport of this drug as curated by DrugBank." drug="#{translational}"/>
+			
+			<tp:associatedClinicalTrials annotation="#{translational.getAnnotationFromString('AssociatedClinicalTrialAnnotation')}" curated="Manually curated clinical trials for this drug from selected external databases."/>
+		</h:panelGroup>
+	</ui:define>
+	
+
+</ui:composition>
+	

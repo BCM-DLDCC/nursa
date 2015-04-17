@@ -1,0 +1,316 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	template="/WEB-INF/templates/standard.xhtml">
+
+	<!--  no breadcrumb or menu section on this page? -->
+	
+	<!-- menu added 4/25/14 cmw -->
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml"/>
+	</ui:define>
+
+	<ui:define name="title">NURSA - Register</ui:define>
+	
+	<ui:define name="pageTitle">
+		<h5>Register</h5>
+	</ui:define>
+
+	<ui:define name="body">
+		<br />
+		<div class="compact">
+
+			<p>
+				<strong>The information you submit will not be passed on to
+					third parties and you will have the opportunity to remove yourself
+					from our system at any time by e-mailing <a
+					href="mailto:editor@nursa.org">editor@nursa.org</a>.
+				</strong>
+			</p>
+
+			<p>Please fill in the fields below. Fields marked with * are
+				required.</p>
+
+			<ui:fragment rendered="#{facesContext.isValidationFailed()}">
+				<p class="error">There were some problems with your submission.
+					Fields highlighted in red are missing required values.</p>
+				<p:messages globalOnly="true" />
+			</ui:fragment>
+
+
+			<h:form>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">Personal Information</h5>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4">
+								<!-- consider putting the below div into a custom component,
+							when we have time -->
+								<div class="form-group #{firstName.valid?'':'has-error'}">
+									<h:outputLabel value="First Name*" for="firstName"
+										styleClass="#{firstName.valid?'':'error'}" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.firstName}"
+										class="form-control input-sm" id="firstName" required="true"
+										binding="#{firstName}" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group #{lastName.valid?'':'has-error'}">
+									<h:outputLabel value="Last Name*" for="lastName"
+										styleClass="#{lastName.valid?'':'error'}" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.lastName}"
+										class="form-control input-sm" id="lastName" required="true"
+										binding="#{lastName}" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Middle Initial" for="middleInit" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.middleInitial}"
+										class="form-control input-sm" id="middleInit" required="false"
+										style="width: 87px;" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:outputLabel value="Title" for="title" />
+									<br />
+									<p:selectOneMenu id="title" styleClass="compact"
+										value="#{userService.selectedUserInformation.title}"
+										panelStyleClass="compact">
+										<f:selectItem itemValue="PhD" itemLabel="PhD" />
+										<f:selectItem itemValue="MD" itemLabel="MD" />
+										<f:selectItem itemValue="PhD/MD" itemLabel="PhD/MD" />
+										<f:selectItem itemValue="Mr" itemLabel="Mr" />
+										<f:selectItem itemValue="Mrs" itemLabel="Mrs" />
+										<f:selectItem itemValue="Ms" itemLabel="Ms" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">Contact Information</h5>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group #{institution.valid?'':'has-error'}">
+									<h:outputLabel value="Institution*" for="institution"
+										styleClass="#{institution.valid?'':'error'}" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.institution}"
+										class="form-control input-sm" id="institution" required="true"
+										binding="#{institution}" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Department" for="department" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.department}"
+										class="form-control input-sm" id="department" required="false" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Room" for="room" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.room}"
+										class="form-control input-sm" id="room" required="false" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:outputLabel value="Address Line 1" for="address1" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.address1}"
+										class="form-control input-sm" id="address1" required="false" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:outputLabel value="Address Line 2" for="address2" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.address2}"
+										class="form-control input-sm" id="address2" required="false" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="City" for="city" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.city}"
+										class="form-control input-sm" id="city" required="false" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="State/Province" for="state" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.state}"
+										class="form-control input-sm" id="state" required="false" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Zip/Postal Code" for="zip" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.postalCode}"
+										class="form-control input-sm" id="zip" required="false" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Country" for="country" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.country}"
+										class="form-control input-sm" id="country" required="false" />
+								</div>
+							</div>
+							<div class = "col-md-8"></div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Telephone" for="telephone" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.phone}"
+										class="form-control input-sm" id="telephone" required="false" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<h:outputLabel value="Fax" for="fax" />
+									<h:inputText value="#{userService.selectedUserInformation.fax}"
+										class="form-control input-sm" id="fax" required="false" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group #{email.valid?'':'has-error'}">
+									<h:outputLabel value="Email*" for="email"
+										styleClass="#{email.valid?'':'error'}" />
+									<h:inputText
+										value="#{userService.selectedUserInformation.email.value}"
+										class="form-control input-sm" id="email" required="true"
+										binding="#{email}"
+										validator="edu.bcm.dldcc.big.nursa.validator.EmailValidator" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">User Information</h5>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group #{username.valid?'':'has-error'}">
+									<h:outputLabel value="Username*" for="username"
+										styleClass="#{username.valid?'':'error'}" />
+									<h:inputText value="#{userService.username}"
+										class="form-control input-sm" id="username" required="true"
+										binding="#{username}"
+										validator="edu.bcm.dldcc.big.nursa.validator.UserNamelValidator" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group #{password.valid?'':'has-error'}">
+									<h:outputLabel value="Password*" for="password"
+										styleClass="#{password.valid?'':'error'}" />
+									<h:inputSecret value="#{userService.password}"
+										class="form-control input-sm" id="password" required="true"
+										binding="#{password}"
+										validator="edu.bcm.dldcc.big.nursa.validator.PasswordValidator">
+										<f:attribute name="confirmPassword" value="#{confirmPassword}" />
+									</h:inputSecret>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group #{confirmPassword.valid?'':'has-error'}">
+									<h:outputLabel value="Confirm Password*" for="confirmPassword"
+										styleClass="#{confirmPassword.valid?'':'error'}" />
+									<!--  I suspect this should go into a transient 
+										field, but I don't think there's a giant difference
+										CMW -->
+									<h:inputSecret value="#{userService.password}"
+										class="form-control input-sm" id="confirmPassword"
+										required="true" binding="#{confirmPassword}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">Preferences</h5>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<h:outputLabel value="Subscribe to the NURSA Newsletter "
+										for="subscribeNews" />
+									<p:selectBooleanCheckbox id="subscribeNews"
+										value="#{userService.selectedUserInformation.subscribeNewsletter}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">Complete</h5>
+					</div>
+					<div class="panel-body">
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-md-12"> -->
+<!-- 								<p:message for="captcha" /> -->
+<!-- 								<p:captcha theme="clean" secure="true" label="Verification Code" -->
+<!-- 									id="captcha" -->
+<!-- 									requiredMessage="Please enter the verfication codes below" -->
+<!-- 									validatorMessage="The codes you entered do not match what is being displayed. Please try again or click the help button for more information." /> -->
+								<!-- Here is the hardest to read CAPTCHA in the world -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<div class="row">
+							<div class="col-md-12">
+								<p:commandButton action="#{userService.register()}"
+									value="Register" styleClass="btn btn-primary navbar-right"
+									ajax="false" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</h:form>
+		</div>
+	</ui:define>
+
+</ui:composition>

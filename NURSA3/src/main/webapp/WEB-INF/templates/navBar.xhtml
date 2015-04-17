@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- main navigation
+can take a passed parameter called active
+it will set the class of the top level menu item that matches it to active
+ex:
+
+active = "Molecule" will set the top level "Molecule" to active
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition>
+	<!-- wrap it for custom css namespace -->
+
+	<!-- this div - specifically, the class on the div - is needed to get the menu
+		to work in Safari. I'm looking into why this is the case and will hopefully remove it soon
+		12/6/13 cmw 
+		1/7/14 cmw - there's a new version of Flat UI Kit out, but I'm not ready to drop it in just yet until
+		we have time to test and tweak-->
+	<div class="iconbar"></div>
+
+	<div class="nursaNav">
+		<div class="navbar navbar-default">
+			<div class="navbar-header">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse"
+					data-target=".navbar-collapse-01"></button>
+			</div>
+			<div class="navbar-collapse collapse navbar-collapse-01">
+				<ul class="nav navbar-nav">
+					<!-- Menu items go here -->
+					<li><h:link outcome = "/index.jsf"
+					styleClass= "#{active=='Home'?'active':''}">Home</h:link>
+						</li>
+					<li><h:link outcome="/molecules/index"
+					 styleClass= "#{active=='Molecules'?'active':''}">Molecules</h:link>
+						<ul>
+							<li><h:link outcome="/molecules/index">All</h:link></li>
+							<li><h:link outcome="/molecules/index">
+									<f:param name="molType" value="Nuclear Receptor" />
+								Nuclear Receptors</h:link></li>
+							<li><h:link outcome="/molecules/index">
+									<f:param name="molType" value="Coregulator" />
+								Coregulators</h:link></li>
+							<li><h:link outcome="/molecules/index">
+									<f:param name="molType" value="Ligand" />
+								Ligands</h:link></li>
+						</ul></li>
+					<li><h:link outcome = "/datasets/index"
+					styleClass= "#{active=='Datasets'?'active':''}">Datasets</h:link>
+						<ul>
+							<li><h:link outcome="/datasets/index">All</h:link></li>
+							<ui:remove><!-- TODO make dynamic  ie use list of all types--></ui:remove>
+							<li><h:link outcome="/datasets/index"><f:param name="datasetType" value="Affinity Purification" />Affinity Purification</h:link></li>
+							<li><h:link outcome="/datasets/index"><f:param name="datasetType" value="ChIP-ChIP" />ChIP-ChIP</h:link></li>
+							<li><h:link outcome="/datasets/index"><f:param name="datasetType" value="Q-PCR" />Q-PCR</h:link></li>
+						</ul></li>
+					<li><h:link outcome = "/tools/index" styleClass= "#{active=='Tools'?'active':''}">Tools</h:link>
+						<ul>
+							<li><a href="http://www.nursa.org/nursaGrails/transcriptomine/query?showLayout=1" target="_blank">Transcriptomine</a></li>
+							<li><h:link outcome = "/tools/index">External Tools</h:link></li>
+						</ul>
+					</li>
+					<li><h:link outcome = "/reagents/index"
+					styleClass= "#{active=='Reagents'?'active':''}">Reagents</h:link>
+						<ul>
+							<li><h:link outcome="/reagents/index">All</h:link></li>
+							<li><h:link outcome="/reagents/index">
+								<f:param name="reagentType" value="Animal Model" />Animal Models</h:link></li>
+							<li><h:link outcome="/reagents/index">
+								<f:param name="reagentType" value="Antibody" />Antibodies</h:link></li>
+							<li><h:link outcome="/reagents/index">
+								<f:param name="reagentType" value="Cell Line" />Cell Lines</h:link></li>
+							<li><h:link outcome="/reagents/index">
+								<f:param name="reagentType" value="Primer" />Primers</h:link></li>
+						</ul></li>
+					<li><h:link outcome = "/clinical/index"
+					styleClass= "#{active=='Clinical'?'active':''}">Clinical</h:link>
+						<ul>
+							<li><h:link outcome="/clinical/index">All</h:link></li>
+							<li><h:link outcome="/clinical/index"><f:param name="translationalType" value="Clinical Trial" />Clinical Trials</h:link></li>
+							<li><h:link outcome="/clinical/index"><f:param name="translationalType" value="Disease" />Diseases</h:link></li>
+							<li><h:link outcome="/clinical/index"><f:param name="translationalType" value="Drug" />Drugs</h:link></li>
+						</ul></li>
+					<li><h:link outcome = "/funding/index.jsf"
+						styleClass= "#{active=='Funding'?'active':''}">Funding</h:link>
+						<ul>
+							<li><h:link outcome = "/funding/index">Funding Welcome</h:link></li>
+							<li><h:link outcome="/funding/ndsp_rfp">NDSP RFPs</h:link></li>
+							<li><h:link outcome="/funding/other_funding">Other Funding Opportunities</h:link></li>
+							<li><h:link outcome="/funding/nursa_projects">NURSA-funded Research Projects</h:link></li>
+							<li><h:link outcome="/underConstruction.jsf">NURSA-funded Research Publications</h:link></li>
+						</ul></li>
+					<li><a href = "http://www.nrsignaling.org/" target = "_blank">NRS</a></li>
+					<li><h:link outcome = "/newswire/index.jsf"
+					styleClass= "#{active=='Newswire'?'active':''}">Newswire</h:link>
+						</li>
+					<li><h:link outcome = "/about/index.jsf"
+					styleClass= "#{active=='About'?'active':''}">About</h:link>
+						<ul>
+							<li><h:link outcome = "/about/index">About Welcome</h:link></li>
+							<li><h:link outcome="/about/ourTeam">Our Team</h:link></li>
+							<li><h:link outcome="/about/NIDDKWelcome.jsf">NIDDK Welcome</h:link></li>
+							<li><h:link outcome="/about/tutorial">NR Video Tutorial</h:link></li>
+							<li><h:link outcome="/about/GEMS">GEMS</h:link></li>
+							<li><h:link outcome="/about/faqs">FAQs</h:link></li>
+							<li><h:link outcome="/about/feedback">Feedback</h:link></li>
+							<li><h:link outcome = "/contact.jsf">Contact Us</h:link></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+</ui:composition>
+
+
+
+</html>

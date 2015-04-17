@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/template.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite/commonComponents">
+	<ui:define name="body">
+		<h:form id="adminForm">
+			<!--  -->
+			<p:dataTable id="userList" var="user"
+				value="#{adminController.users}">
+				<p:column style="width:36px">
+					<p:rowToggler />
+				</p:column>
+				<p:column headerText="ID">
+					<h:outputText value="#{user.identityId}" />
+				</p:column>
+				<p:column headerText="Last Name">
+					<h:outputText value="#{user.lastName}" />
+				</p:column>
+				<p:column headerText="First Name">
+					<h:outputText value="#{user.firstName}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{user.email}" />
+				</p:column>
+				<p:column style="width:60px">
+					<p:commandLink update=":adminForm:editUserInformation"
+						action="#{adminController.editUser(user)}"
+						oncomplete="editUserInformationWidget.show();" process="@this"
+						style="float: left;">
+						<span class="ui-icon ui-icon-pencil" />
+					</p:commandLink>
+					<p:commandLink update=":adminForm:userList"
+						action="#{adminController.deleteUser(user)}" process="@this"
+						style="float: left;">
+						<span class="ui-icon ui-icon-delete" />
+					</p:commandLink>
+				</p:column>
+				<p:rowExpansion>
+					<cc:userView selectedUser="#{user}" />
+					<cc:roleView roles="#{adminController.getRoles(user)}" />
+					<div class="buttonRight">
+						<p:commandButton value="Reset Password"
+							action="#{adminController.resetPassword(user)}"
+							oncomplete="editUserInformationWidget.hide()" process="@this" />
+					</div>
+				</p:rowExpansion>
+				<f:facet name="footer">
+					<div class="buttonRight">
+						<p:commandButton value="Add User"
+							action="#{adminController.addUser}"
+							oncomplete="editUserInformationWidget.show()"
+							update=":adminForm:editUserInformation" process="@this" />
+					</div>
+				</f:facet>
+			</p:dataTable>
+			
+			<!-- EDIT USER INFORMATION -->
+			<p:dialog id="editUserInformation" header="Edit User"
+				widgetVar="editUserInformationWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{adminController.cancelUser}" />
+				<p>Please Fill Out All Fields</p>
+				<div class="dialog">
+					<cc:userEdit selectedUser="#{adminController.selectedUser}"
+						displaySecurityCredentials="#{adminController.username eq ''}"
+						username="#{adminController.username}"
+						password="#{adminController.password}" confirmEmail="#{false}" />
+				</div>
+				<cc:roleView roles="#{adminController.selectedUserRoles}" editable="#{true}" />
+				<div style="clear: both" />
+				<div class="buttonRight">
+				<p:commandButton id="cancel" value="Cancel"
+					action="#{adminController.cancelUser}" ajax="false" />
+					<p:commandButton id="save" value="Save"
+						action="#{adminController.saveUser}" ajax="false" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

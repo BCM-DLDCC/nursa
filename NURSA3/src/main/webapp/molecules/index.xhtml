@@ -1,0 +1,112 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	xmlns:func="http://bcm.edu.dldcc.big/nursa/functions"
+	template="/WEB-INF/templates/masterList.xhtml">
+
+<!--  DO NOT AUTOFORMAT THIS FILE. DOING SO WILL BREAK THE COUNT OF NUCLEAR RECEPTORS IN THE "TOTALS" SECTION.
+THIS IS IN ALL CAPS BECAUSE CW DID THIS YET AGAIN, BREAKING THAT PART OF THE PAGE, AND HE NEEDS TO STOP DOING
+THAT POST-HASTE.
+
+SIGNED,
+CW -->
+
+	<ui:define name="title">NURSA - Molecules</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Molecules" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Molecules" outcome="/molecules/index.jsf" /></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="autocomplete">
+		<sc:moleculeSearch />
+	</ui:define>
+
+	<ui:define name="filter">
+		<sc:molFilter id="molsearchComponent" />
+	</ui:define>
+
+	<ui:define name="totals">
+		<!-- apollo new FR 7.2.2014 removed totals: see pre 9.30.2014 commit ( rev 1626) to return them  -->
+	</ui:define>
+
+	<ui:define name="listing">
+
+		<h:form id="molListing">
+			<p:dataTable id="moleculeResults" 
+						 var="molResult" 
+						 value="#{moleculeSearchService.searchResults}" 
+						 paginator="true" 
+						 emptyMessage="No molecules found for the search criteria" 
+						 paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" 
+						 currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}" 
+						 rowsPerPageTemplate="10,20,50" 
+						 sortMode="multiple" 
+						 sortBy="type" 
+						 styleClass="listTable" 
+						 rows="10" 
+						 lazy="true">
+
+				<!-- TYPE -->
+				<p:column width="100" sortBy="#{molResult.type}" id="typeColumn">
+					<f:facet name="header">
+						<h:outputText value="Type" />
+					</f:facet>
+					<h:outputText value="#{molResult.type}" />
+				</p:column>
+				<!-- SYMBOL -->
+				<p:column sortBy="#{molResult.symbol}" width="150"
+					id="symbolColumn">
+					<f:facet name="header">
+						<h:outputText value="Symbol" />
+					</f:facet>
+					<h:link value="#{molResult.symbol}" outcome="/index.jsf">
+						<f:param name="doi" value="#{molResult.doi}" />
+					</h:link>
+				</p:column>
+				<!-- NAME -->
+				<p:column sortBy="#{molResult.name}" width="200" id="nameColumn">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{molResult.name}" />
+				</p:column>
+				<!-- DESCRIPTION -->
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Description" />
+					</f:facet>
+					#{func:truncateToWord(molResult.description,200)}
+				</p:column>
+			</p:dataTable>
+
+			<layout:blockUI block = ":molListing" trigger = ":molListing:moleculeResults" widgetVar = "molBlock"/>
+
+		</h:form>
+
+		<!-- CMW 2/17/14 javascript to update the filter count in the mol filter
+		I don't like putting it here because it introduces a dependency to the filter,
+		but putting it here means that the value will be correct - otherwise, the mol filter is 
+		called first, before this has a chance to be updated.
+		 -->
+		<script>
+			$($("#molTotal").text("#{moleculeSearchService.searchResults.rowCount}"))
+			$($("#nrTotal").text("#{moleculeSearchService.searchResults.moleculeBreakdown.containsKey('Nuclear Receptor')? moleculeSearchService.searchResults.moleculeBreakdown['Nuclear Receptor']:0}"))
+			$($("#crTotal").text("#{moleculeSearchService.searchResults.moleculeBreakdown.containsKey('Coregulator')? moleculeSearchService.searchResults.moleculeBreakdown['Coregulator']:0}"))
+			$($("#ligandTotal").text("#{moleculeSearchService.searchResults.moleculeBreakdown.containsKey('Ligand')? moleculeSearchService.searchResults.moleculeBreakdown['Ligand']:0}"))
+		 </script>
+
+	</ui:define>
+
+</ui:composition>

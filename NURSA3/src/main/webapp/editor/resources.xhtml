@@ -1,0 +1,777 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/template.xhtml"
+	xmlns:p="http://primefaces.org/ui">
+	<ui:define name="body">
+		<h:form id="resourceForm">
+			<!-- TECHNIQUE -->
+			<p:panel id="TechniqueArea" header="Technique" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="techniqueList" var="technique"
+					value="#{techniqueListProducer.techniques}">
+					<p:column headerText="Name">
+						<h:outputText value="#{technique.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editTechnique"
+							action="#{techniqueController.edit(technique)}"
+							oncomplete="editTechniqueWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:techniqueList"
+							action="#{techniqueController.delete(technique)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Technique"
+								action="#{techniqueController.add}"
+								oncomplete="editTechniqueWidget.show()"
+								update=":resourceForm:editTechnique" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editTechnique" header="Edit Technique"
+				widgetVar="editTechniqueWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{techniqueController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText value="#{techniqueController.selectedTechnique.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{techniqueController.cancel}"
+						update=":resourceForm:techniqueList"
+						oncomplete="editTechniqueWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{techniqueController.save}"
+						update=":resourceForm:techniqueList"
+						oncomplete="editTechniqueWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- DISEASE -->
+			<p:panel id="diseaseArea" header="Disease" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="diseaseList" var="disease"
+					value="#{diseaseListProducer.diseases}">
+					<p:column headerText="OMIN ID">
+						<h:outputText value="#{disease.ominId}" />
+					</p:column>
+					<p:column headerText="Title">
+						<h:outputText value="#{disease.title}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editDisease"
+							action="#{diseaseController.edit(disease)}"
+							oncomplete="editDiseaseWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:diseaseList"
+							action="#{diseaseController.delete(disease)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Disease"
+								action="#{diseaseController.add}"
+								oncomplete="editDiseaseWidget.show()"
+								update=":resourceForm:editDisease" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editDisease" header="Edit Disease"
+				widgetVar="editDiseaseWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{diseaseController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="OMIN ID: " styleClass="labelText" />
+					<p:inputText value="#{diseaseController.selectedDisease.ominId}" />
+					<h:outputText value="Title: " styleClass="labelText" />
+					<p:inputText value="#{diseaseController.selectedDisease.title}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{diseaseController.cancel}"
+						update=":resourceForm:diseaseList"
+						oncomplete="editDiseaseWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{diseaseController.save}"
+						update=":resourceForm:diseaseList"
+						oncomplete="editDiseaseWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<!-- SPECIES -->
+			<p:panel id="speciesArea" header="Species" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="speciesList" var="species"
+					value="#{speciesListProducer.species}">
+					<p:column headerText="Taxonomy ID">
+						<h:outputText value="#{species.taxonomyId}" />
+					</p:column>
+					<p:column headerText="NAME">
+						<h:outputText value="#{species.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editSpecies"
+							action="#{speciesController.edit(species)}"
+							oncomplete="editSpeciesWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:speciesList"
+							action="#{speciesController.delete(species)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Species"
+								action="#{speciesController.add}"
+								oncomplete="editSpeciesWidget.show()"
+								update=":resourceForm:editSpecies" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editSpecies" header="Edit Species"
+				widgetVar="editSpeciesWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{speciesController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="TAXONOMY ID: " styleClass="labelText" />
+					<p:inputText
+						value="#{speciesController.selectedSpecies.taxonomyId}" />
+					<h:outputText value="NAME: " styleClass="labelText" />
+					<p:inputText value="#{speciesController.selectedSpecies.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{speciesController.cancel}"
+						update=":resourceForm:speciesList"
+						oncomplete="editSpeciesWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{speciesController.save}"
+						update=":resourceForm:speciesList"
+						oncomplete="editSpeciesWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+
+			<!-- GO TERM -->
+			<p:panel id="goTermArea" header="GO Term" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="goTermList" var="goTerm"
+					value="#{goTermListProducer.goTerms}">
+					<p:column headerText="Term Name">
+						<h:outputText value="#{goTerm.termName}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editGOTerm"
+							action="#{goTermController.edit(goTerm)}"
+							oncomplete="editGOTermWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:goTermList"
+							action="#{goTermController.delete(goTerm)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add GOTerm"
+								action="#{goTermController.add}"
+								oncomplete="editGOTermWidget.show()"
+								update=":resourceForm:editGOTerm" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editGOTerm" header="Edit GOTerm"
+				widgetVar="editGOTermWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{goTermController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Term Name " styleClass="labelText" />
+					<p:inputText value="#{goTermController.selectedGOTerm.termName}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel" action="#{goTermController.cancel}"
+						update=":resourceForm:goTermList"
+						oncomplete="editGOTermWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{goTermController.save}"
+						update=":resourceForm:goTermList"
+						oncomplete="editGOTermWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- GENE -->
+			<p:panel id="GeneArea" header="Gene" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="geneList" var="gene"
+					value="#{geneListProducer.genes}">
+					<p:column headerText="Entrez Gene ID">
+						<h:outputText value="#{gene.entrezGeneId}" />
+					</p:column>
+					<p:column headerText="Name">
+						<h:outputText value="#{gene.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editGene"
+							action="#{geneController.edit(gene)}"
+							oncomplete="editGeneWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:geneList"
+							action="#{geneController.delete(gene)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Gene" action="#{geneController.add}"
+								oncomplete="editGeneWidget.show()"
+								update=":resourceForm:editGene" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editGene" header="Edit Gene" widgetVar="editGeneWidget"
+				resizable="false" modal="true">
+				<p:ajax event="close" listener="#{geneController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Entrez Gene ID: " styleClass="labelText" />
+					<p:inputText value="#{geneController.selectedGene.entrezGeneId}" />
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText value="#{geneController.selectedGene.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel" action="#{geneController.cancel}"
+						update=":resourceForm:geneList" oncomplete="editGeneWidget.hide()"
+						process="@none" />
+					<p:commandButton value="Save" action="#{geneController.save}"
+						update=":resourceForm:geneList" oncomplete="editGeneWidget.hide()"
+						process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- REFERENCE CATEGORY -->
+			<p:panel id="ReferenceCategoryArea" header="Reference Category"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="referenceCategoryList" var="referenceCategory"
+					value="#{referenceCategoryListProducer.referenceCategorys}">
+					<p:column headerText="Name">
+						<h:outputText value="#{referenceCategory.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editReferenceCategory"
+							action="#{referenceCategoryController.edit(referenceCategory)}"
+							oncomplete="editReferenceCategoryWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:referenceCategoryList"
+							action="#{referenceCategoryController.delete(referenceCategory)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Reference Category"
+								action="#{referenceCategoryController.add}"
+								oncomplete="editReferenceCategoryWidget.show()"
+								update=":resourceForm:editReferenceCategory" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editReferenceCategory" header="Edit Reference Category"
+				widgetVar="editReferenceCategoryWidget" resizable="false"
+				modal="true">
+				<p:ajax event="close"
+					listener="#{referenceCategoryController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText
+						value="#{referenceCategoryController.selectedReferenceCategory.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{referenceCategoryController.cancel}"
+						update=":resourceForm:referenceCategoryList"
+						oncomplete="editReferenceCategoryWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{referenceCategoryController.save}"
+						update=":resourceForm:referenceCategoryList"
+						oncomplete="editReferenceCategoryWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- RESEARCH AREA -->
+			<p:panel id="ResearchAreaArea" header="Research Area"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="researchAreaList" var="researchArea"
+					value="#{researchAreaListProducer.researchAreas}">
+					<p:column headerText="Name">
+						<h:outputText value="#{researchArea.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editResearchArea"
+							action="#{researchAreaController.edit(researchArea)}"
+							oncomplete="editResearchAreaWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:researchAreaList"
+							action="#{researchAreaController.delete(researchArea)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Research Area"
+								action="#{researchAreaController.add}"
+								oncomplete="editResearchAreaWidget.show()"
+								update=":resourceForm:editResearchArea" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editResearchArea" header="Edit Research Area"
+				widgetVar="editResearchAreaWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{researchAreaController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText
+						value="#{researchAreaController.selectedResearchArea.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{researchAreaController.cancel}"
+						update=":resourceForm:researchAreaList"
+						oncomplete="editResearchAreaWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{researchAreaController.save}"
+						update=":resourceForm:researchAreaList"
+						oncomplete="editResearchAreaWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- JOURNAL -->
+			<p:panel id="JournalArea" header="Journal" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="journalList" var="journal"
+					value="#{journalListProducer.journals}">
+					<p:column headerText="Name">
+						<h:outputText value="#{journal.name}" />
+					</p:column>
+					<p:column headerText="URL">
+						<h:outputText value="#{journal.url}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editJournal"
+							action="#{journalController.edit(journal)}"
+							oncomplete="editJournalWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:journalList"
+							action="#{journalController.delete(journal)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Journal"
+								action="#{journalController.add}"
+								oncomplete="editJournalWidget.show()"
+								update=":resourceForm:editJournal" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editJournal" header="Edit Journal"
+				widgetVar="editJournalWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{journalController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText value="#{journalController.selectedJournal.name}" />
+					<h:outputText value="URL: " styleClass="labelText" />
+					<p:inputText value="#{journalController.selectedJournal.url}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{journalController.cancel}"
+						update=":resourceForm:journalList"
+						oncomplete="editJournalWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{journalController.save}"
+						update=":resourceForm:journalList"
+						oncomplete="editJournalWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<!-- CLINICAL TRIAL TYPE -->
+			<p:panel id="ClinicalTrialTypeArea" header="Clinical Trial Type"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="clinicalTrialTypeList" var="clinicalTrialType"
+					value="#{clinicalTrialTypeListProducer.clinicalTrialTypes}">
+					<p:column headerText="Type">
+						<h:outputText value="#{clinicalTrialType.type}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editClinicalTrialType"
+							action="#{clinicalTrialTypeController.edit(clinicalTrialType)}"
+							oncomplete="editClinicalTrialTypeWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:clinicalTrialTypeList"
+							action="#{clinicalTrialTypeController.delete(clinicalTrialType)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add ClinicalTrialType"
+								action="#{clinicalTrialTypeController.add}"
+								oncomplete="editClinicalTrialTypeWidget.show()"
+								update=":resourceForm:editClinicalTrialType" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editClinicalTrialType"
+				header="Edit Clinical Trial Type"
+				widgetVar="editClinicalTrialTypeWidget" resizable="false"
+				modal="true">
+				<p:ajax event="close"
+					listener="#{clinicalTrialTypeController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText
+						value="#{clinicalTrialTypeController.selectedClinicalTrialType.type}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{clinicalTrialTypeController.cancel}"
+						update=":resourceForm:clinicalTrialTypeList"
+						oncomplete="editClinicalTrialTypeWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{clinicalTrialTypeController.save}"
+						update=":resourceForm:clinicalTrialTypeList"
+						oncomplete="editClinicalTrialTypeWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+			<!-- CLINICAL TRIAL STATUS -->
+			<p:panel id="ClinicalTrialStatusArea" header="Clinical Trial Status"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="clinicalTrialStatusList" var="clinicalTrialStatus"
+					value="#{clinicalTrialStatusListProducer.clinicalTrialStatus}">
+					<p:column headerText="Status">
+						<h:outputText value="#{clinicalTrialStatus.status}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editClinicalTrialStatus"
+							action="#{clinicalTrialStatusController.edit(clinicalTrialStatus)}"
+							oncomplete="editClinicalTrialStatusWidget.show();"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:clinicalTrialStatusList"
+							action="#{clinicalTrialStatusController.delete(clinicalTrialStatus)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add ClinicalTrialStatus"
+								action="#{clinicalTrialStatusController.add}"
+								oncomplete="editClinicalTrialStatusWidget.show()"
+								update=":resourceForm:editClinicalTrialStatus" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editClinicalTrialStatus"
+				header="Edit Clinical Trial Status"
+				widgetVar="editClinicalTrialStatusWidget" resizable="false"
+				modal="true">
+				<p:ajax event="close"
+					listener="#{clinicalTrialStatusController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText
+						value="#{clinicalTrialStatusController.selectedClinicalTrialStatus.status}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{clinicalTrialStatusController.cancel}"
+						update=":resourceForm:clinicalTrialStatusList"
+						oncomplete="editClinicalTrialStatusWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{clinicalTrialStatusController.save}"
+						update=":resourceForm:clinicalTrialStatusList"
+						oncomplete="editClinicalTrialStatusWidget.hide()"
+						process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<!-- CLINICAL TRIAL PHASE -->
+			<p:panel id="ClinicalTrialPhaseArea" header="Clinical Trial Phase"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="clinicalTrialPhaseList" var="clinicalTrialPhase"
+					value="#{clinicalTrialPhaseListProducer.clinicalTrialPhases}">
+					<p:column headerText="Phase">
+						<h:outputText value="#{clinicalTrialPhase.phase}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editClinicalTrialPhase"
+							action="#{clinicalTrialPhaseController.edit(clinicalTrialPhase)}"
+							oncomplete="editClinicalTrialPhaseWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:clinicalTrialPhaseList"
+							action="#{clinicalTrialPhaseController.delete(clinicalTrialPhase)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Clinical Trial Phase"
+								action="#{clinicalTrialPhaseController.add}"
+								oncomplete="editClinicalTrialPhaseWidget.show()"
+								update=":resourceForm:editClinicalTrialPhase" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editClinicalTrialPhase"
+				header="Edit Clinical Trial Phase"
+				widgetVar="editClinicalTrialPhaseWidget" resizable="false"
+				modal="true">
+				<p:ajax event="close"
+					listener="#{clinicalTrialPhaseController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Phase: " styleClass="labelText" />
+					<p:inputText
+						value="#{clinicalTrialPhaseController.selectedClinicalTrialPhase.phase}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{clinicalTrialPhaseController.cancel}"
+						update=":resourceForm:clinicalTrialPhaseList"
+						oncomplete="editClinicalTrialPhaseWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{clinicalTrialPhaseController.save}"
+						update=":resourceForm:clinicalTrialPhaseList"
+						oncomplete="editClinicalTrialPhaseWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<!-- PATHWAY -->
+			<p:panel id="PathwayArea" header="Pathway" toggleable="true"
+				collapsed="true">
+				<p:dataTable id="pathwayList" var="pathway"
+					value="#{pathwayListProducer.pathways}">
+					<p:column headerText="Name">
+						<h:outputText value="#{pathway.name}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editPathway"
+							action="#{pathwayController.edit(pathway)}"
+							oncomplete="editPathwayWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:pathwayList"
+							action="#{pathwayController.delete(pathway)}" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Pathway"
+								action="#{pathwayController.add}"
+								oncomplete="editPathwayWidget.show()"
+								update=":resourceForm:editPathway" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editPathway" header="Edit Pathway"
+				widgetVar="editPathwayWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{pathwayController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText value="#{pathwayController.selectedPathway.name}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{pathwayController.cancel}"
+						update=":resourceForm:pathwayList"
+						oncomplete="editPathwayWidget.hide()" process="@none" />
+					<p:commandButton value="Save" action="#{pathwayController.save}"
+						update=":resourceForm:pathwayList"
+						oncomplete="editPathwayWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<!-- REAGENT SOURCE -->
+			<p:panel id="ReagentSourceArea" header="Reagent Source"
+				toggleable="true" collapsed="true">
+				<p:dataTable id="reagentSourceList" var="reagentSource"
+					value="#{reagentSourceListProducer.reagentSources}">
+					<p:column headerText="Name">
+						<h:outputText value="#{reagentSource.name}" />
+					</p:column>
+					<p:column headerText="EMail">
+						<h:outputText value="#{reagentSource.email}" />
+					</p:column>
+					<p:column headerText="URL">
+						<h:outputText value="#{reagentSource.url}" />
+					</p:column>
+					<p:column style="width:60px">
+						<p:commandLink update=":resourceForm:editReagentSource"
+							action="#{reagentSourceController.edit(reagentSource)}"
+							oncomplete="editReagentSourceWidget.show();" process="@this"
+							style="float: left;">
+							<span class="ui-icon ui-icon-pencil" />
+						</p:commandLink>
+						<p:commandLink update=":resourceForm:reagentSourceList"
+							action="#{reagentSourceController.delete(reagentSource)}"
+							process="@this" style="float: left;">
+							<span class="ui-icon ui-icon-delete" />
+						</p:commandLink>
+					</p:column>
+					<f:facet name="footer">
+						<div class="buttonRight">
+							<p:commandButton value="Add Reagent Source"
+								action="#{reagentSourceController.add}"
+								oncomplete="editReagentSourceWidget.show()"
+								update=":resourceForm:editReagentSource" process="@this" />
+						</div>
+					</f:facet>
+				</p:dataTable>
+			</p:panel>
+
+			<p:dialog id="editReagentSource" header="Edit Reagent Source"
+				widgetVar="editReagentSourceWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{reagentSourceController.cancel}" />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Name: " styleClass="labelText" />
+					<p:inputText
+						value="#{reagentSourceController.selectedReagentSource.name}" />
+					<h:outputText value="EMail: " styleClass="labelText" />
+					<p:inputText
+						value="#{reagentSourceController.selectedReagentSource.email}" />
+						<h:outputText value="URL: " styleClass="labelText" />
+					<p:inputText
+						value="#{reagentSourceController.selectedReagentSource.url}" />
+				</h:panelGrid>
+
+
+				<div class="buttonRight">
+					<p:commandButton value="Cancel"
+						action="#{reagentSourceController.cancel}"
+						update=":resourceForm:reagentSourceList"
+						oncomplete="editReagentSourceWidget.hide()" process="@none" />
+					<p:commandButton value="Save"
+						action="#{reagentSourceController.save}"
+						update=":resourceForm:reagentSourceList"
+						oncomplete="editReagentSourceWidget.hide()" process="@parent" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,187 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets" lang="en"
+	template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="header">
+
+		<ui:include src="/WEB-INF/templates/header.xhtml" />
+				
+	</ui:define>
+
+	<ui:define name="body">
+		<style>
+			.clickableDiv { /* apollo 2enable whole div section be clickable */
+			  position:absolute; 
+			  width:100%;
+			  height:100%;
+			  top:0;
+			  left: 0;
+			  z-index: 1;
+			  /* overlap error in IE7/8, make sure you have an empty gif */
+			  background-image: url('empty.gif');
+			}   
+		</style>
+
+		<div class="homePage">
+			<div class="row">
+				<div class="col-md-4">
+					<!-- cmw 5/1/14 not using layout:panel here because we're also using links inside the panel,
+					and my goal with layout:panel is to keep it pretty lean -->
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="molecules">
+								<span class="clickableDiv"></span>
+								<h5 class="panel-title">Molecules</h5>
+								
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/molecule.svg" />
+							<p>Essential, curated information on NRs, ligands and
+								coregulators</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="http://www.nursa.org/nursaGrails/transcriptomine/query?showLayout=1" target="_blank">
+							<span class="clickableDiv"></span>
+								<h5 class="panel-title">Transcriptomine</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/tm-logo.svg" />
+							<p>The nuclear receptor target gene database</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="datasets">
+								<span class="clickableDiv"></span>
+								<h5 class="panel-title">Datasets</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/pc.svg" />
+							<p>Published datasets in the nuclear receptor field</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="reagents">
+								<span class="clickableDiv"></span>
+								<h5 class="panel-title">Reagents</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/flask.svg" />
+							<p>Published reagents in the nuclear receptor field</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="http://www.nrsignaling.org/" target = "_blank">
+								<span class="clickableDiv"></span>
+								<h5 class="panel-title">Nuclear Receptor Signaling</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<!-- this should be redone as an svg. look into this when there's time -->
+							<h:graphicImage library="images" name="/nrs.svg" />
+							<p>A peer-reviewed, MEDLINE-indexed, Open Access journal</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+						<a href="clinical">
+							<span class="clickableDiv"></span>
+								<h5 class="panel-title">Clinical</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/pills.svg" />
+							<p>NRs, ligands and coregulators in the etiology and
+								treatment of disease</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a href="funding">
+								<span class="clickableDiv"></span>
+								<h5 class="panel-title">Funding</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/money.svg" />
+							<p>NURSA-funded research opportunities, projects, and publications</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<a  href="newswire">
+								<h5 class="panel-title">NURSA Newswire</h5>
+							</a>
+						</div>
+						<div class="panel-body twitter-feed">
+							<p:scrollPanel mode="native" style="height:100px">
+								<a class="twitter-timeline" data-tweet-limit="1" data-chrome="nofooter noheader noborders" data-dnt="true" href="https://twitter.com/NURSATweets/lists/nursatweets-list" data-widget-id="482174407914168321">Tweets from https://twitter.com/NURSATweets/lists/nursatweets-list</a>
+								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+							</p:scrollPanel>
+							<a class="more-tweets" id="toMoreTweets" href="#" onclick="PF('tweetDlg').show();">more ...</a>
+						</div>
+					</div>
+					<p:dialog header="@NursaTweets" widgetVar="tweetDlg" minHeight="40">
+					    <a class="twitter-timeline" height="600" width="300"  data-dnt="true" href="https://twitter.com/NURSATweets/lists/nursatweets-list" data-widget-id="482174407914168321">Tweets from https://twitter.com/NURSATweets/lists/nursatweets-list</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+					</p:dialog>
+				</div>
+				<div class="col-md-4">
+
+					<div class="panel panel-default">
+
+						<div class="panel-heading">
+							<a href="about">
+								<h5 class="panel-title">About NURSA</h5>
+							</a>
+						</div>
+						<div class="panel-body">
+							<h:graphicImage library="images" name="/icons/bulb.svg" />
+							<a href="about/tutorial.jsf"> NR Video Tutorial</a><br /> 
+							<a href="about/faqs.jsf">FAQs</a><br />
+							<a href="about/index.jsf">PI Welcome</a><br />
+							<h:link value="NIDDK Welcome" outcome="./about/NIDDKWelcome.jsf"></h:link>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

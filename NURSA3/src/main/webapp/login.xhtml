@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/standard.xhtml">
+
+	<ui:define name="body">
+		<p:messages globalOnly="true" />
+		<br />
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<h:form>
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h5 class="panel-title">Log In</h5>
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<h:outputLabel value="Username" for="username" />
+								<h:inputText value="#{credentials.username}"
+									class="form-control input-sm" id="username" required="true" />
+							</div>
+							<div class="form-group">
+								<h:outputLabel value="Password" for="password" />
+								<h:inputText value="#{credentials.password}"
+									class="form-control input-sm" id="password" required="true" />
+							</div>
+
+							<p:commandButton action="#{identity.login()}" value="Login"
+								styleClass="btn btn-primary navbar-right" ajax="false" />
+
+							<br style="clear: both;" /> <a href="#"
+								onClick="PF('forgotPassword').show();return false;"> Forgot
+								your password?</a> <br /> <a href="#"
+								onClick="PF('forgotUsername').show();return false;"> Forgot
+								your username?</a>
+
+
+						</div>
+
+					</div>
+					</h:form>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+
+		<!-- dialog boxes for forgotten password/username -->
+		<p:dialog modal="true" header="Forgotten Password"
+			widgetVar="forgotPassword">
+			<h:form>
+					Enter your username to reset your password.
+				<div class="form-group">
+					<h:outputLabel value="Username" for="pwUsername" />
+					<h:inputText value="" class="form-control input-sm" id="pwUsername"
+						required="true" />
+				</div>
+
+				<p:commandButton action="#{foo}" value="Submit"
+					styleClass="btn btn-primary navbar-right" />
+			</h:form>
+		</p:dialog>
+
+		<p:dialog modal="true" header="Forgotten Username"
+			widgetVar="forgotUsername">
+			<h:form>
+				Enter the email address that you registered with.
+				<div class="form-group">
+					<h:outputLabel value="Email address" for="unEmail" />
+					<h:inputText value="" class="form-control input-sm" id="unEmail"
+						required="true" />
+				</div>
+
+				<p:commandButton action="#{foo}" value="Submit"
+					styleClass="btn btn-primary navbar-right" />
+			</h:form>
+		</p:dialog>
+	</ui:define>
+
+
+</ui:composition>

@@ -1,0 +1,102 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sc="http://java.sun.com/jsf/composite/searchComponents"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	xmlns:func="http://bcm.edu.dldcc.big/nursa/functions"
+	template="/WEB-INF/templates/masterList.xhtml">
+
+<!--  DO NOT AUTOFORMAT THIS FILE. DOING SO WILL BREAK THE COUNT OF NUCLEAR RECEPTORS IN THE "TOTALS" SECTION.
+THIS IS IN ALL CAPS BECAUSE CW DID THIS YET AGAIN, BREAKING THAT PART OF THE PAGE, AND HE NEEDS TO STOP DOING
+THAT POST-HASTE.
+
+SIGNED,
+CW -->
+
+	<ui:define name="title">NURSA - Datasets</ui:define>
+
+	<ui:define name="nav">
+		<ui:include src="/WEB-INF/templates/navBar.xhtml">
+			<ui:param name="active" value="Datasets" />
+		</ui:include>
+	</ui:define>
+
+	<ui:define name="breadcrumb">
+		<ul class="breadcrumb">
+			<li><h:link value="Home" outcome="/index.jsf" /></li>
+			<li><h:link value="Datasets" outcome="/datasets/index.jsf" /></li>
+		</ul>
+	</ui:define>
+
+	<ui:define name="autocomplete">
+		<sc:datasetSearch />
+	</ui:define>
+
+	<ui:define name="filter">
+		<sc:datasetFilter id="datasetsearchComponent" />
+	</ui:define>
+
+	<ui:define name="totals">
+	</ui:define>
+
+	<ui:define name="listing">
+
+		<h:form id="datasetListing">
+			<p:dataTable id="datasetResults" var="datasetResult" paginator="true"
+				value="#{datasetSearchService.searchResults}"
+				emptyMessage="No datasets found for the search criteria"
+				sortMode="multiple" 
+				paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+				rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+				lazy="true">
+
+				<!-- TYPE -->
+				<p:column width="100" sortBy="#{datasetResult.type}" id="typeColumn">
+					<f:facet name="header">
+						<h:outputText value="Type" />
+					</f:facet>
+					<h:outputText value="#{datasetResult.type}" />
+				</p:column>
+				
+				<!-- NAME -->
+				<p:column sortBy="#{datasetResult.name}" width="200" id="nameColumn">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:link value="#{datasetResult.name}" outcome="./index.jsf">
+						<f:param name="doi" value="#{datasetResult.doi.doi}" />
+					</h:link>
+				</p:column>
+				
+				<!-- SPECIES -->
+				<p:column sortBy="#{datasetResult.species.commonName}" width="200" id="speciesColumn">
+					<f:facet name="header">
+						<h:outputText value="Species" />
+					</f:facet>
+					<h:outputText value="#{datasetResult.species.commonName}" />
+				</p:column>								
+			</p:dataTable>
+
+<layout:blockUI block = ":datasetListing" trigger = ":datasetListing:datasetResults" widgetVar = "datasetBlock"/>
+
+		</h:form>
+
+		<!-- CMW 2/17/14 javascript to update the filter count in the dataset filter
+		I don't like putting it here because it introduces a dependency to the filter,
+		but putting it here means that the value will be correct - otherwise, the dataset filter is 
+		called first, before this has a chance to be updated.
+		 -->
+		<script>
+			$($("#datasetTotal").text("#{datasetSearchService.searchResults.rowCount}"))
+			$($("#qPCRTotal").text("#{datasetSearchService.searchResults.datasetBreakdown.containsKey('Q-PCR')? datasetSearchService.searchResults.datasetBreakdown['Q-PCR']:0}"))
+			$($("#affinityPurificationTotal").text("#{datasetSearchService.searchResults.datasetBreakdown.containsKey('Affinity Purification')? datasetSearchService.searchResults.datasetBreakdown['Affinity Purification']:0}"))
+			$($("#cHIPCHIPTotal").text("#{datasetSearchService.searchResults.datasetBreakdown.containsKey('ChIP-ChIP')? datasetSearchService.searchResults.datasetBreakdown['ChIP-ChIP']:0}"))
+						
+		 </script>
+
+	</ui:define>
+
+</ui:composition>

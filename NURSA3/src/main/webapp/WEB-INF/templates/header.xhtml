@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"> 
+<!--  large page header -->
+<ui:composition>
+	<!--  page header -->
+		<div class="header">
+			<div class="row">
+				<div class="col-md-9">
+					<h:link outcome = "/index.jsf">
+						<h:graphicImage name="images/nursa_logo_original.svg" class="img-rounded nursa-logo pull-left" />
+					</h:link>
+					<div class="title"><h:link value = "NURSA" outcome = "/index.jsf"/></div>
+					<div class="subtitle">Nuclear Receptor Signaling Atlas</div>
+					<div class="mission">A research resource for the nuclear
+						receptor signaling community</div>
+
+
+				</div>
+				<div class="col-md-3">
+
+					<ui:remove><!-- FR nu 7.10.2014
+					MyNURSA
+					<div class="myNURSA"><h:link outcome = "/underConstruction.jsf">Sign In</h:link> | <h:link outcome = "/register.jsf">Register</h:link></div>
+					<br style="clear: both;" />
+					--></ui:remove>
+
+					<div class="socialButtons">
+						Follow Us:
+						<a class="btn btn-social-twitter" href = "https://twitter.com/NURSATweets" target = "_blank">
+							<i class="fui-twitter"></i>
+						</a>
+						<a class="btn btn-social-facebook" href = "https://www.facebook.com/nrsignalingatlas" target = "_blank">
+							<i class="fui-facebook"></i>
+						</a>
+					</div>
+				</div>
+				<!--  end row -->
+			</div>
+
+
+		</div>
+		<!-- end page header -->
+</ui:composition> 
+</html>

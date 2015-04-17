@@ -1,0 +1,96 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	<composite:interface>
+		<composite:attribute name="annotation"
+			type="edu.bcm.dldcc.big.nursa.model.moleculeAnnotations.PolypeptideAnnotation"
+			required="true" />
+
+	</composite:interface>
+	<composite:implementation>
+	<h:form>
+		<p:panel header="Protein (alt)" toggleable="true" collapsed="true">
+			<p:ajax event="toggle"
+				listener="#{ajaxPanelController.alternateComponentState(cc.attrs.annotation.id.toString())}"
+				update="poly2PnlContent" onstart="$.blockUI()"
+				oncomplete="$.unblockUI()" />
+			<p:outputPanel id="poly2PnlContent">
+				<p:outputPanel
+					rendered="#{ajaxPanelController.renderComponent(cc.attrs.annotation.id.toString())}">
+
+					<p class="curated">Manually annotated records for this gene's encoded protein at selected external databases.</p>
+
+					<ui:repeat value="#{cc.attrs.annotation.polypeptides}" var="pp">
+						<h6>UniProt ID: #{pp.uniProtKB_AC} | RefSeq ID:
+							#{pp.refseqId}</h6>
+						<h:form>
+							<p:dataTable id="mrnaTable" var="mrna" value="#{pp.encodingMRNA}"
+								emptyMessage="No data are available for this ortholog."
+								paginator="true" paginatorPosition="bottom"
+								paginatorTemplate="Show {RowsPerPageDropdown} per page {CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+				{PageLinks} {NextPageLink} {LastPageLink}"
+								currentPageReportTemplate="Showing {startRecord} - {endRecord} of {totalRecords}"
+								rowsPerPageTemplate="10,20,50" styleClass="listTable" rows="10"
+								sortBy="encodingGenomicAccessionVersion">
+								<!-- adding empty header to get round top 
+				solely for L&F. May go away -->
+								<f:facet name="header">&#160;</f:facet>
+								<!-- Genomic Accession -->
+								<p:column width="100"
+									sortBy="#{mrna.encodingGenomicAccessionVersion}">
+									<f:facet name="header">
+										<h:outputText value="Genomic Accession Version" />
+									</f:facet>
+									<a
+										href="#{fn:replace('http://www.ncbi.nlm.nih.gov/nuccore/${ID}','\\$\\{ID\\}',mrna.encodingGenomicAccessionVersion)}"
+										target="_blank"> #{mrna.encodingGenomicAccessionVersion}</a>
+								</p:column>
+								<!-- mRNA -->
+								<p:column width="100" sortBy="#{mrna.rnaAccessionVersion}">
+									<f:facet name="header">
+										<h:outputText value="mRNA" />
+									</f:facet>
+									<a
+										href="#{fn:replace('http://www.ncbi.nlm.nih.gov/nuccore/${ID}','\\$\\{ID\\}',mrna.rnaAccessionVersion)}"
+										target="_blank"> #{mrna.rnaAccessionVersion}</a>
+								</p:column>
+								<!-- START -->
+								<p:column width="100" sortBy="#{mrna.startPos}">
+									<f:facet name="header">
+										<h:outputText value="Start" />
+									</f:facet>
+									<h:outputText value="#{mrna.startPos}" />
+								</p:column>
+								<!-- STOP -->
+								<p:column width="100" sortBy="#{mrna.endPos}">
+									<f:facet name="header">
+										<h:outputText value="End" />
+									</f:facet>
+									<h:outputText value="#{mrna.endPos}" />
+								</p:column>
+								<!-- encoded protein -->
+								<p:column width="100" sortBy="#{mrna.polypeptide.refseqId}">
+									<f:facet name="header">
+										<h:outputText value="Encoded Protein" />
+									</f:facet>
+									<a
+										href="#{fn:replace('http://www.ncbi.nlm.nih.gov/protein/${ID}','\\$\\{ID\\}',mrna.polypeptide.refseqId)}"
+										target="_blank"> #{mrna.polypeptide.refseqId}</a>
+								</p:column>
+							</p:dataTable>
+
+						</h:form>
+					</ui:repeat>
+				</p:outputPanel>
+			</p:outputPanel>
+		</p:panel>
+</h:form>
+	</composite:implementation>
+</ui:composition>

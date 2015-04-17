@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/template.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite/commonComponents">
+	<ui:define name="body">
+		<h:form id="myNURSAForm">
+			<cc:userView
+				selectedUser="#{commonProjectController.myUserInformation}" />
+			<div style="clear: both" />
+			<div class="buttonRight">
+				<p:commandButton value="Change Password"
+					action="#{adminController.editUser(commonProjectController.myUserInformation)}"
+					oncomplete="passwordChangeWidget.show()" process="@this" />
+
+				<p:commandButton update=":myNURSAForm:editUserInformation"
+					value="Edit"
+					action="#{adminController.editUser(commonProjectController.myUserInformation)}"
+					oncomplete="editUserInformationWidget.show();" process="@this"
+					style="float: left;" />
+			</div>
+			<div style="clear: both" />
+
+			<p:dialog id="editUserInformation" header="Edit User"
+				widgetVar="editUserInformationWidget" resizable="false" modal="true">
+				<p:ajax event="close" listener="#{adminController.cancelUser}" />
+				<p>Please Fill Out All Fields</p>
+				<div class="dialog">
+					<cc:userEdit selectedUser="#{adminController.selectedUser}"
+						displaySecurityCredentials="#{adminController.username eq ''}"
+						username="#{adminController.username}"
+						password="#{adminController.password}" confirmEmail="#{false}" />
+				</div>
+				<div style="clear: both" />
+				<div class="buttonRight">
+					<p:commandButton id="save" value="Save"
+						action="#{adminController.saveUser}" ajax="false" />
+
+				</div>
+				<div style="clear: both" />
+			</p:dialog>
+
+			<p:dialog header="Change Password" widgetVar="passwordChangeWidget"
+				resizable="false" modal="true">
+
+				<p:panelGrid>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="password" value="Password"
+								styleClass="labelText" />
+						</p:column>
+						<p:column>
+							<p:password id="password" value="#{adminController.password}"
+								styleClass="informationText" />
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+
+				<p:commandButton id="submitButton"
+					action="#{adminController.changePassword}" value="Submit"
+					oncomplete="passwordChangeWidget.hide();" process="@parent" />
+
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

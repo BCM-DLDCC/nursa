@@ -1,0 +1,183 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cc="http://java.sun.com/jsf/composite/commonComponents">
+	<p:dataTable var="user" value="#{adminController.users}">
+		<p:column style="width:36px">
+			<p:rowToggler />
+		</p:column>
+		<p:column headerText="ID">
+			<h:outputText value="#{user.identityId}" />
+		</p:column>
+		<p:column headerText="Last Name">
+			<h:outputText value="#{user.lastName}" />
+		</p:column>
+		<p:column headerText="First Name">
+			<h:outputText value="#{user.firstName}" />
+		</p:column>
+		<p:column headerText="Email">
+			<h:outputText value="#{user.email}" />
+		</p:column>
+		<p:column style="width:60px">
+			<p:commandLink update=":adminForm:editUserInformation"
+				action="#{adminController.editUser(user)}"
+				oncomplete="editUserInformationWidget.show();" process="@this"
+				style="float: left;">
+				<span class="ui-icon ui-icon-pencil" />
+			</p:commandLink>
+			<p:commandLink update=":adminForm:adminTabPanel"
+				action="#{adminController.deleteUser(user)}" process="@this"
+				style="float: left;">
+				<span class="ui-icon ui-icon-delete" />
+			</p:commandLink>
+
+		</p:column>
+		<p:rowExpansion>
+			<p:panelGrid>
+				<p:row>
+					<p:column>
+						<h:outputText value="Greeting: " styleClass="labelText" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{user.greeting}"
+							styleClass="informationText" />
+					</p:column>
+					<p:column>
+						<p:graphicImage value="#{imageController.retrieveImage}"
+							width="200" rendered="#{user.profileImageFileId ne null}">
+							<f:param name="fileId" value="#{user.profileImageFileId}" />
+						</p:graphicImage>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<h:outputText value="Roles: " styleClass="labelText" />
+					</p:column>
+					<p:column colspan="2">
+						<p:dataTable var="role"
+							value="#{adminUtility.allRoles(user.identityId)}">
+							<p:column headerText="Role Type">
+								<h:outputText value="#{role.roleType.name}" />
+							</p:column>
+							<p:column headerText="Group">
+								<h:outputText value="#{role.group.name}" />
+							</p:column>
+						</p:dataTable>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+		</p:rowExpansion>
+		<f:facet name="footer">
+			<div class="buttonRight">
+				<p:commandButton value="Add User"
+					action="#{adminController.addUser}"
+					oncomplete="editUserInformationWidget.show()"
+					update=":adminForm:editUserInformation" process="@this" />
+			</div>
+		</f:facet>
+	</p:dataTable>
+
+	<p:dialog id="editUserInformation" header="Edit User"
+		widgetVar="editUserInformationWidget" resizable="false" modal="true">
+		<p:ajax event="close" listener="#{adminController.cancelUser}" />
+		<cc:userEdit username="#{adminController.username}"
+			selectedUser="#{adminController.selectedUser}"
+			password="#{adminController.password}" />
+		<p:panelGrid>
+			<p:row>
+				<p:column>
+					<h:outputText value="Roles: " styleClass="labelText" />
+				</p:column>
+				<p:column>
+					<p:dataTable id="relationships" var="role"
+						value="#{adminController.selectedUserRoles}">
+						<p:column headerText="Role Type">
+							<h:outputText value="#{role.roleType.name}" />
+						</p:column>
+						<p:column headerText="Group">
+							<h:outputText value="#{role.group.name}" />
+						</p:column>
+						<p:column style="width:60px">
+							<p:commandLink update=":adminForm:relationships"
+								action="#{adminController.deleteRole(role)}" process="@this"
+								style="float: left;">
+								<span class="ui-icon ui-icon-delete" />
+							</p:commandLink>
+						</p:column>
+						<f:facet name="footer">
+							<div class="buttonRight">
+								<p:commandButton value="Add New Role"
+									action="#{adminController.addRole}"
+									oncomplete="editRelationshipWidget.show()"
+									update=":adminForm:editRelationship" process="@this" />
+							</div>
+						</f:facet>
+					</p:dataTable>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+
+		<div style="clear: both" />
+		<div class="buttonRight">
+			<p:commandButton value="Reset Password"
+				action="#{adminController.resetPassword}"
+				oncomplete="editUserInformationWidget.hide()" process="@this"
+				disabled="#{adminController.username eq ''}" />
+			<p:commandButton value="Cancel"
+				onclick="editUserInformationWidget.hide()" process="@parent" />
+			<p:commandButton value="Save" action="#{adminController.saveUser}"
+				oncomplete="editUserInformationWidget.hide()" update="adminTabPanel"
+				process="@parent" />
+		</div>
+		<div style="clear: both" />
+	</p:dialog>
+
+	<p:dialog id="editRelationship" header="Edit Relationship"
+		widgetVar="editRelationshipWidget" resizable="false" modal="true">
+		<p:panelGrid>
+			<p:row>
+				<p:column>
+					<h:outputText value="Role: "
+						style="float: right; font-weight: bold;" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu value="#{adminController.selectedRoleType}"
+						converter="roleTypeConverter">
+						<f:selectItems value="#{superAdminController.roleTypes}"
+							var="role" itemLabel="#{role.name}" itemValue="#{role}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+			<p:row>
+				<p:column>
+					<h:outputText value="Group: "
+						style="float: right; font-weight: bold;" />
+				</p:column>
+				<p:column>
+					<p:selectOneMenu value="#{adminController.selectedGroup}"
+						converter="groupConverter">
+						<f:selectItems value="#{superAdminController.groups}" var="group"
+							itemLabel="#{group.name}" itemValue="#{group}" />
+					</p:selectOneMenu>
+				</p:column>
+			</p:row>
+		</p:panelGrid>
+		<div style="clear: both" />
+		<div class="buttonRight">
+			<p:commandButton value="Cancel"
+				action="#{adminController.cancelRole}"
+				onclick="editRelationshipWidget.hide()" process="@parent" />
+			<p:commandButton value="Save" action="#{adminController.saveRole}"
+				oncomplete="editRelationshipWidget.hide()"
+				update=":adminForm:relationships" process="@parent" />
+		</div>
+		<div style="clear: both" />
+
+	</p:dialog>
+
+</ui:composition>

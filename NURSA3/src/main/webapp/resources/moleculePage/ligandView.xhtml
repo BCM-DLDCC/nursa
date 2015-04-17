@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:layout="http://java.sun.com/jsf/composite/layout"
+	xmlns:composite="http://java.sun.com/jsf/composite">
+	<composite:interface displayName="overview section for a ligand">
+		<composite:attribute name="molecule"
+			type="edu.bcm.dldcc.big.nursa.model.Molecule" required="true"
+			displayName="a molecule object that should be a ligand" />
+
+	</composite:interface>
+	<composite:implementation>
+		<div id="#{cc.clientId}">
+
+			<p:panel header="Overview" toggleable="false">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="row">
+							<div class="col-md-2"><strong>Name</strong></div>
+							<div class="col-md-10">#{cc.attrs.molecule.name.name}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2"><strong>Synonyms</strong></div>
+							<div class="col-md-10">
+								<ui:repeat value="#{cc.attrs.molecule.synonymsAsList}" var="item" varStatus="status">
+									#{item}<h:outputText rendered="#{!status.last}" value="; " />
+								</ui:repeat>
+								<h:panelGroup rendered="#{cc.attrs.molecule.synonymsAsList.size eq 0}">
+									Not Available
+								</h:panelGroup>
+							</div>	
+						</div>
+						
+						<ui:remove><!--  temporary disable ligand 37400 --></ui:remove>
+						<h:panelGroup rendered="#{cc.attrs.molecule.id ne 37400}">
+							<p:dataList styleClass="no-border-data-list" value="#{cc.attrs.molecule.datasources}" var="dataResource" type="none">
+								<h:panelGroup rendered="#{dataResource.organization.orgType eq 'LIGAND'}">
+									<h:panelGroup rendered="#{dataResource.organization.abbreviation eq 'PubChem'}">
+										<div class="row">
+											<div class="col-md-2"><strong>PubChem ID</strong></div>
+											<div class="col-md-10">
+												<layout:dataRow staticUrlDisplayPath="" collection="#{dataResource.synonyms}" displayPath="name" baseURL="#{dataResource.organization.baseURL}" layout="vertical" />
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{dataResource.organization.abbreviation eq 'Chebi'}">
+										<div class="row">
+											<div class="col-md-2"><strong>ChEBI ID</strong></div>
+											<div class="col-md-10">
+												<layout:dataRow staticUrlDisplayPath="" collection="#{dataResource.synonyms}" displayPath="name" baseURL="#{dataResource.organization.baseURL}" layout="vertical" />
+											</div>
+										</div>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{dataResource.organization.abbreviation eq 'IUPHAR'}">
+										<div class="row">
+											<div class="col-md-2"><strong>IUPHAR ID</strong></div>
+											<div class="col-md-10">
+												<layout:dataRow staticUrlDisplayPath="" collection="#{dataResource.synonyms}" displayPath="name" baseURL="#{dataResource.organization.baseURL}" layout="vertical" />
+											</div>
+										</div>
+									</h:panelGroup>
+								</h:panelGroup>
+							</p:dataList>
+						</h:panelGroup>
+
+						<div class="row">
+							<div class="col-md-2"><strong>CAS Registry ID</strong></div>
+							<div class="col-md-10">
+								<h:panelGroup rendered="#{cc.attrs.molecule.casNumber != null and cc.attrs.molecule.casNumber.name != null}">#{cc.attrs.molecule.casNumber.name}</h:panelGroup>
+								<h:panelGroup rendered="#{cc.attrs.molecule.casNumber eq null or cc.attrs.molecule.casNumber.name eq null}">Not Available</h:panelGroup>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-2"><strong>Jmol</strong></div>
+							<div class="col-md-10">Not available</div>
+						</div>
+						<layout:dataRow label="Description" data="#{cc.attrs.molecule.blurb}" />
+					</div>
+					<div class="col-md-2">
+						<h:graphicImage library="images" class="ligand-image img-rounded" name="/ligand/#{cc.attrs.molecule.moleculePictureFile}" />	
+					</div>
+				</div>
+			</p:panel>
+		</div>
+
+	</composite:implementation>
+</ui:composition>
